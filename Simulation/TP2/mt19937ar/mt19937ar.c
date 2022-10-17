@@ -40,6 +40,7 @@
    http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html
    email: m-mat @ math.sci.hiroshima-u.ac.jp (remove space)
 */
+
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h> 
@@ -278,6 +279,19 @@ double * Ques3_B_HDL(int size, int *array)
     return - Mean * log(1.0 - uniform(0, 1));
  }
 
+
+
+
+ double normalDis(double x, double mu, double sita)
+ {
+    double Pi = acos(-1.0);
+    double e = 2.71828182;
+    double fx;
+    fx  = (1 / (sqrt(2 * Pi) * sita)) * pow(e, -1 * (pow(x-mu, 2) / (2 * (pow(sita, 2)))));
+
+    return fx;
+ }
+
  /** ----------------------------------------------------------------------------------------------------------------------------------- *
    * @fn        rejectionAlgo                                                                                                            *
    * @brief     A Gaussian distributed random number generator.                                                                          *
@@ -290,20 +304,22 @@ double * Ques3_B_HDL(int size, int *array)
    * ----------------------------------------------------------------------------------------------------------------------------------- */
 double rejectionAlgo(double MinX, double MaxX, double MaxY)
 {
-    double pi = acos(-1.0);
     double x;
     double y;
     double naOne;
     double naTwo;
     double res;
+    double realY;
 
     do
     {
-        naOne = uniform(0, 1);
-        naTwo = uniform(0, 1);
+        naOne = uniform(0.0, 1.0);
+        naTwo = uniform(0.0, 1.0);
         x = MinX + naOne * (MaxX - MinX);
         y = MaxY * naTwo;
-        if(y <= ((1 / (sqrt(2 * pi))) * pow(2.71828182, -1 * (pow(x, 2) / 2))))
+        realY = normalDis(x, (MaxX - MinX) / 2, 20);
+        if(y <= realY)
+        //((1 / (sqrt(2 * pi))) * pow(2.71828182, -1 * (pow(x, 2) / 2))))
         {
             res = x;
             break;
@@ -312,6 +328,37 @@ double rejectionAlgo(double MinX, double MaxX, double MaxY)
 
 
     return res;
+}
+
+double BoxMuller(double mean, double stdc)
+{
+    double v1 = 0;
+    double v2 = 0;
+    double s = 0;
+    int phase = 0;
+    double x;
+    if(phase == 0)
+    {
+        do
+        {
+            double u1 = genrand_real2() / RAND_MAX;
+            double u2 = genrand_real2() / RAND_MAX;
+
+            v1 = 2 * u1 - 1;
+            v2 = 2 * u2 - 1;
+            s = v1 * v1 + v2 * v2;
+        }while(s >= 1 || s ==0);
+
+        x = v1 * sqrt(-2 * log(s) / s);
+    }
+    else
+    {
+        x = v2 * sqrt(-2 * log(s) / s);
+    }
+
+    phase = 1 - phase;
+
+    return mean + x * stdc;
 }
 
 
@@ -562,24 +609,60 @@ int main(void)
 
 
     /* ------------------------------ Test of question FIVE PART ONE ------------------------------ */
-    
+    /*
     int count[200] = {0};
-    for(int i=0; i<2048; i++)
+    FILE *fp;
+    fp = fopen("record.txt", "w");
+    for(int i=0; i<204800; i++)
     {
         printf("Now is in the %d time", i+1);
         double test = rejectionAlgo(30, 180, 1);
-        printf("%lf\n", test);
+        printf("\t%lf\n", test);
+        fprintf(fp, "%10.7lf  ", test);
         for(int i=1; i<=200; i++)
         {
-            if(test < i) count[i] += 1;
+            if(test > i && test < i+1) count[i] += 1;
         }
     }
+    fclose(fp);
 
     for(int i=30; i<=180; i++)
     {
         printf("Result as point %d is %d times\n", i, count[i]);
     }
-    
+    */
+
+    /* ------------------------------ Test of question FIVE PART TWO ------------------------------ */
+    double mean = 0;
+    double stdc = 1;
+    double data = 0;
+    int count[20];
+
+    for(int i=0; i<100; ++i)
+    {
+        data = BoxMuller(mean, stdc);
+        printf("%10.7lf ", data);
+    }
+
+    data = 0;
+    for(int i=0; i<1000; ++i)
+    {
+        data = BoxMuller(mean, stdc) * 10 - 5;
+        if(-4>data) count[0]++;
+        if(-4<data && -3>data) count[1]++;
+        if(-3<data && -2>data) count[2]++;
+        if(-2<data && -1>data) count[3]++;
+        if(-1<data && 0>data) count[4]++;
+        if(0<data && 1>data) count[5]++;
+        if(1<data && 2>data) count[6]++;
+        if(2<data && 3>data) count[7]++;
+        if(3<data && 4>data) count[8]++;
+        if(4<data && 5>data) count[9]++;
+    }
+    for(int i=0; i<10; i++)
+    {
+        printf("%d\n",count[i]);
+    }
 
 
 
