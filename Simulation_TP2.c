@@ -40,7 +40,7 @@
    http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html
    email: m-mat @ math.sci.hiroshima-u.ac.jp (remove space)
 */
-
+// test of git
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h> 
