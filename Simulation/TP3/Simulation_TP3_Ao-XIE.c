@@ -150,7 +150,7 @@ double avgPi(double times)
 
 }
 
-double avgPiConf(int n)
+double calculRange(int n)
 {
     double T;
     double S;
@@ -274,9 +274,9 @@ int main()
     valAvgPi = sum / times_ques2;
     sum = 0;
 
-    for(int j = 0; j<times_ques2; j++)
+    for(int j = 0; count<times_ques2; j++)
     {
-        if(Pi[j] < valAvgPi+avgPiConf(times_ques2) && Pi[j] > valAvgPi-avgPiConf(times_ques2))
+        if(Pi[j] < valAvgPi+calculRange(times_ques2) && Pi[j] > valAvgPi-calculRange(times_ques2))
         {
             sum += Pi[j];
             count++;
