@@ -179,6 +179,36 @@ double avgPiConf(int n)
     case 7:
         T = 2.365;
         break;
+    case 8:
+        T = 2.308;
+        break;
+    case 9:
+        T = 2.262;
+        break;
+    case 10:
+        T = 2.228;
+        break;
+    case 11:
+        T = 2.201;
+        break;
+    case 12:
+        T = 2.179;
+        break;
+    case 13:
+        T = 2.160;
+        break;
+    case 14:
+        T = 2.145;
+        break;
+    case 15:
+        T = 2.131;
+        break;
+    case 16:
+        T = 2.120;
+        break;
+    case 17:
+        T = 2.110;
+        break;
     case 40:
         T = 2.021;
         break;
@@ -198,6 +228,7 @@ double avgPiConf(int n)
     }
 
     S = S / (double)(n - 1);
+    S = sqrt(S);
     return S * T;
 }
 
@@ -214,20 +245,22 @@ int main()
     double count = 0;
 
     /* ------------------------------ Test of question ONE ------------------------------ */ 
-    /*
+    printf("Question One\n");
     printf("%lf\t", simPi(1000));
     printf("%lf\t", simPi(1000000));
     printf("%lf\n", simPi(1000000000));
-    */
+    
 
     /* ------------------------------ Test of question TWO ------------------------------ */
-    /*
+    printf("Question TWO\n");
     valAvgPi = avgPi(times_ques2);
+    printf("%lf\n", valAvgPi);
     printf("Absolte error is %lf\n", M_PI - valAvgPi);
     printf("Relative error is %lf\n", M_PI / valAvgPi);
-    */
+    
 
     /* ------------------------------ Test of question TWO ------------------------------ */
+    printf("Question THREE\n");
     do
     {
         /* code */
@@ -235,6 +268,7 @@ int main()
         Pi[i] = valAvgPi;
         sum += valAvgPi;
         i++;
+        //printf("test of %d\t times \n",i);
     } while (i<times_ques2);
 
     valAvgPi = sum / times_ques2;
@@ -251,6 +285,7 @@ int main()
 
     valAvgPi = sum / count;
 
+    printf("%lf\n", valAvgPi);
     printf("Absolte error is %lf\n", M_PI - valAvgPi);
     printf("Relative error is %lf\n", M_PI / valAvgPi);
 
