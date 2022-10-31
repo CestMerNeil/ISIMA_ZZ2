@@ -122,6 +122,7 @@ double simPi(int times)
     double countOut = 0;
     for(int i=0; i<times; i++)
     {
+        printf("Now we've done %lf\t in %d times \r", (double)i/times*100, times);
         x = genrand_real2();
         y = genrand_real2();
         countOut += 1;
@@ -132,6 +133,7 @@ double simPi(int times)
     }
 
     Pi = (4 * countIn) / countOut;
+    printf("%d times have done\n", times);
 
     return Pi;
 }
@@ -149,7 +151,8 @@ double avgPi(double times)
     double sumPi = 0;
     for(int i=0; i<times; i++)
     {
-        avgPi[i] = simPi(1000000);
+        avgPi[i] = simPi(1000000000);
+        printf("Now we've done %lf\r", (double)i/times*100);
         sumPi += avgPi[i];
     }
 
@@ -308,8 +311,8 @@ int main()
 
     /* ------------------------------ Test of question ONE ------------------------------ */ 
     printf("/* ------------------------------ Test of question ONE ------------------------------ */\n");
-    printf("%lf\t", simPi(1000));
-    printf("%lf\t", simPi(1000000));
+    printf("%lf\n", simPi(1000));
+    printf("%lf\n", simPi(1000000));
     printf("%lf\n", simPi(1000000000));
     
 
@@ -322,7 +325,7 @@ int main()
     
 
     /* ------------------------------ Test of question TWO ------------------------------ */
-    printf("/* ------------------------------ Test of question TWO ------------------------------ */\n");
+    printf("/* ------------------------------ Test of question THREE ------------------------------ */\n");
     do
     {
         /* code */
