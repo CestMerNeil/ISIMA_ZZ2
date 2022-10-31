@@ -11,7 +11,7 @@ int main()
     t_instance g;
     t_solution s;
     t_solution best;
-    lire_fichier(g, "D:/CodeGithub/ISIMA_ZZ2/Outils_Aide_de_la_Decision/TP2truela01.txt");
+    lire_fichier(g, "C:\\Users\\aoxie\\Desktop\\CodeDeAoXIE\\ISIMA_ZZ2\\Outils_Aide_de_la_Decision\\TP2\\truela01.txt");
     printf("before\n");
     bierwith(g, s);
     verifier_vecteur(s, g);
