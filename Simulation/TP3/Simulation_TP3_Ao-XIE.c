@@ -4,8 +4,8 @@
 
 
  /** ----------------------------------------------------------------------------------------------------------------------------------- *
-  * @todo       Prepare the generator of random numbers, It's MT in the second lab.                                                                                               *
-  * ----------------------------------------------------------------------------------------------------------------------------------- */
+  * @todo       Prepare the generator of random numbers, It's MT in the second lab.                                                      *
+  * ------------------------------------------------------------------------------------------------------------------------------------ */
 /* Period parameters */  
 #define N 624
 #define M 397
@@ -107,12 +107,12 @@ double genrand_real2(void)
 }
  
  /** ----------------------------------------------------------------------------------------------------------------------------------- *
-  * @fn         simPi                                                                                                                 *
-  * @brief      Calcul value of Pi with the Monte Carlo Simulation                                                    *
-  * @param      times   Times of calcul.                                                                                  *                                                                                  *
-  * @return     Value of Pi                                                               *
-  * @todo       It's for the question ONE                                                                                               *
-  * ----------------------------------------------------------------------------------------------------------------------------------- */
+  * @fn         simPi                                                                                                                    *
+  * @brief      Calcul value of Pi with the Monte Carlo Simulation                                                                       *
+  * @param      times   Times of calcul.                                                                                                 *
+  * @return     Value of Pi                                                                                                              *
+  * @todo       It's for the question ONE                                                                                                *
+  * ------------------------------------------------------------------------------------------------------------------------------------ */
 double simPi(int times)
 {
     double Pi;
@@ -136,6 +136,13 @@ double simPi(int times)
     return Pi;
 }
 
+ /** ----------------------------------------------------------------------------------------------------------------------------------- *
+  * @fn         avgPi                                                                                                                    *
+  * @brief      Using the simPi() function, multiple calculations are averaged to get a more accurate value.                               *
+  * @param      times   Times of calcul.                                                                                                 *
+  * @return     Value of Pi                                                                                                              *
+  * @todo       It's for the question TWO                                                                                                *
+  * ------------------------------------------------------------------------------------------------------------------------------------ */
 double avgPi(double times)
 {
     double avgPi[50] = {0};
@@ -150,6 +157,13 @@ double avgPi(double times)
 
 }
 
+ /** ----------------------------------------------------------------------------------------------------------------------------------- *
+  * @fn         calculRange                                                                                                              *
+  * @brief      Calculate confidence interval.                                                                                           *
+  * @param      times   Times of calcul.                                                                                                 *
+  * @return     Value of Pi                                                                                                              *
+  * @todo       It's for the question TWO                                                                                                *
+  * ------------------------------------------------------------------------------------------------------------------------------------ */
 double calculRange(int n)
 {
     double T;
@@ -209,10 +223,56 @@ double calculRange(int n)
     case 17:
         T = 2.110;
         break;
+    case 18:
+        T = 2.101;
+        break;
+    case 19:
+        T = 2.093;
+        break;
+    case 20:
+        T = 2.086;
+        break;
+    case 21:
+        T = 2.080;
+        break;
+    case 22:
+        T = 2.076;
+        break;
+    case 23:
+        T = 2.069;
+        break;
+    case 24:
+        T = 2.064;
+        break;
+    case 25:
+        T = 2.060;
+        break;
+    case 26:
+        T = 2.056;
+        break;
+    case 27:
+        T = 2.052;
+        break;
+    case 28:
+        T = 2.048;
+        break;
+    case 29:
+        T = 2.045;
+        break;
+    case 30:
+        T = 2.042;
+        break;
     case 40:
         T = 2.021;
         break;
+    case 80:
+        T = 2.000;
+        break;
+    case 120:
+        T = 1.980;
+        break;
     default:
+        T = 1.960;
         break;
     }
 
@@ -234,9 +294,11 @@ double calculRange(int n)
 
 int main()
 {
+    /* Inisiation for the ramdon generator */
     unsigned long init[4]={0x123, 0x234, 0x345, 0x456}, length=4;
     init_by_array(init, length);
 
+    /* Inisiation for those values */
     double times_ques2 = 40;
     double valAvgPi;
     double sum;
@@ -245,14 +307,14 @@ int main()
     double count = 0;
 
     /* ------------------------------ Test of question ONE ------------------------------ */ 
-    printf("Question One\n");
+    printf("/* ------------------------------ Test of question ONE ------------------------------ */\n");
     printf("%lf\t", simPi(1000));
     printf("%lf\t", simPi(1000000));
     printf("%lf\n", simPi(1000000000));
     
 
     /* ------------------------------ Test of question TWO ------------------------------ */
-    printf("Question TWO\n");
+    printf(" /* ------------------------------ Test of question TWO ------------------------------ */\n");
     valAvgPi = avgPi(times_ques2);
     printf("%lf\n", valAvgPi);
     printf("Absolte error is %lf\n", M_PI - valAvgPi);
@@ -260,7 +322,7 @@ int main()
     
 
     /* ------------------------------ Test of question TWO ------------------------------ */
-    printf("Question THREE\n");
+    printf("/* ------------------------------ Test of question TWO ------------------------------ */\n");
     do
     {
         /* code */
