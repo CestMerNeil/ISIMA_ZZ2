@@ -13,8 +13,9 @@ int Ti[K] = { 0 };
  * @brief	Nombre_de_pieces Nombre_de_machines							                                                      *
  * @brief	machine1 cout1 machine2 cout2 ...                                                                                 *
  * @brief	Chaque ligne correspond a une piece et decrit les operations successives avec leurs couts					      *
- * @param	g		:	structure de graphe vide																				  *
- * @param	file	:	nom du fichier a ouvrir																					  *
+ *																															  *
+ * @param	g		:	structure de graphe vide																			  *
+ * @param	file	:	nom du fichier a ouvrir																				  *
  ******************************************************************************************************************************/
 void lire_fichier(t_instance& g, string file) {
 	ifstream infile(file);
@@ -130,6 +131,7 @@ void verifier_vecteur(t_solution s, t_instance g) {
  * @brief	Calcule les dates de debut de toutes les operations et indique leur pere dans les champs de la structure de		  *  	 
  *			solution passee en parametre par rapport au graphe donne en parametre et d'un vecteur de Bierwith determine       * 
  *			a l'avance																									      *
+ *																															  *
  * @param	g	:	structure du graphe considere																			  *
  * @param	s	:	structure de la solution dans laquelle stocker les informations											  *
  ******************************************************************************************************************************/
