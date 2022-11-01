@@ -11,7 +11,13 @@ const int omax = 20 * 20;
 const int c_infini = 9999;
 const int K = 100000;
 
-
+/*
+ * @brief	Structure de graphe
+ * @param	n		->	Nombre de pieces
+ * @param	m		->	Nombre de machines
+ * @param	p[][]		->	Piece, Temps de traitement
+ * @param	mach[][]	->	Piece, Machine
+ **/
 typedef struct t_instance {
 	int n;
 	int m;
@@ -19,6 +25,15 @@ typedef struct t_instance {
 	int mach[nmax][mmax];
 }t_instance;
 
+
+/*
+ * @brief	Structure de solution
+ * @param	cout	->	Le temps qu'il a fallu pour arriver au sommet
+ * @param	t	->	
+ * @param	pere	->	Sommet pere
+ * @param	vb	->	Piece, Temps de traitement
+ * @param	pere_etoile	->	Piece, Machine
+ **/
 typedef struct t_solution {
 	int cout;
 	int t[nmax][mmax];

@@ -5,32 +5,24 @@ using namespace std;
 int Ti[K] = { 0 };
 
 
-
-/*************************************************************
- * FONCTION lire_fichier                                     *
- *                                                           *
- * Permet de lire une structure de graphe dans un fichier    *
- * et de la stocker dans une instance donnee en parametre    *
- * Un fichier est sous la forme :                            *
- *                                                           *
- * Nombre_de_pieces Nombre_de_machines                       *
- *                                                           *
- * machine1 cout1 machine2 cout2 ...                         *
- *                                                           *
- * Chaque ligne correspond a une piece et decrit les         *
- * operations successives avec leurs couts                   *
- *                                                           *
- * Entrées :                                                 *
- *	- t_instance & g    : structure de graphe vide           *
- *  - string       file : nom du fichier a ouvrir            *
- *************************************************************/
+/******************************************************************************************************************************
+ * @fn		lire_fichier																				                      *
+ *																												              *
+ * @brief	Permet de lire une structure de graphe dans un fichier et de la stocker dans une instance donnee en parametre	  *              
+ * @brief	Un fichier est sous la forme :									                                                  *
+ * @brief	Nombre_de_pieces Nombre_de_machines							                                                      *
+ * @brief	machine1 cout1 machine2 cout2 ...                                                                                 *
+ * @brief	Chaque ligne correspond a une piece et decrit les operations successives avec leurs couts					      *
+ * @param	g		:	structure de graphe vide																				  *
+ * @param	file	:	nom du fichier a ouvrir																					  *
+ ******************************************************************************************************************************/
 void lire_fichier(t_instance& g, string file) {
 	ifstream infile(file);
 
 	/* Si le fichier n'a pas pu etre ouvert */
 	if (!infile.is_open())
 	{
-		cout << "can not open the file \n" << endl;
+		cout << "Can not open the file \n" << endl;
 		exit(-1);
 	}
 	else {
@@ -54,18 +46,14 @@ void lire_fichier(t_instance& g, string file) {
 }
 
 
-
-/*************************************************************
- * FONCTION bierwith                                         *
- *                                                           *
- * Genere un vecteur de bierwith aleatoirement dans le       *
- * champ adapte de la structure passee en parametre          *
- *                                                           *
- * Entrées :                                                 *
- *	- t_instance   g : structure du graphe considere         *
- *  - t_solution & s : structure de la solution dans         *
- *                     laquelle stocker le vecteur           *
- *************************************************************/
+/******************************************************************************************************************************
+ * @fn		bierwith												                                                          *
+ *																														      *
+ * @brief	Genere un vecteur de bierwith aleatoirement dans le champ adapte de la structure passee en parametre	          *
+ *																														      *
+ * @param   g	:	structure du graphe considere																		      *
+ * @param	s	:	structure de la solution dans laquelle stocker le vecteur												  *
+ ******************************************************************************************************************************/
 void bierwith(t_instance g, t_solution& s) {
 	int np = g.n;
 	int d[nmax][2];
@@ -97,19 +85,15 @@ void bierwith(t_instance g, t_solution& s) {
 }
 
 
-/*************************************************************
- * FONCTION verifier_vecteur                                 *
- *                                                           *
- * Verifie que le vecteur de Bierwith de la solution passee  *
- * en parametre est bien construite et termine l'execution   *
- * si ce n'est pas le cas                                    *
- *                                                           *
- * Entrées :                                                 *
- *	- t_instance g : structure du graphe utilise pour        *
- *                   construire le vecteur                   *
- *  - t_solution s : structure de solution ou est stocke le  *
- *                   vecteur a verifier                      *
- *************************************************************/
+/******************************************************************************************************************************
+ * @fn		verifier_vecteur																								  *
+ *																															  *
+ * @brief	 Verifie que le vecteur de Bierwith de la solution passee en parametre est bien construite et termine l'execution *	 
+ *			 si ce n'est pas le cas																							  *
+ *																															  *
+ * @param	g	:	structure du graphe utilise pour construire le vecteur													  *
+ * @param	s	:	structure de solution ou est stocke le vecteur a verifier												  *
+ ******************************************************************************************************************************/
 void verifier_vecteur(t_solution s, t_instance g) {
 	int count[nmax];
 	int np = g.m * g.n;
@@ -140,20 +124,15 @@ void verifier_vecteur(t_solution s, t_instance g) {
 
 
 
-/*************************************************************
- * FONCTION evaluer                                          *
- *                                                           *
- * Calcule les dates de debut de toutes les operations et    *
- * indique leur pere dans les champs de la structure de      *
- * solution passee en parametre par rapport au graphe donne  *
- * en parametre et d'un vecteur de Bierwith determine a      *
- * l'avance                                                  *
- *                                                           *
- * Entrées :                                                 *
- *	- t_instance   g : structure du graphe considere         *
- *  - t_solution & s : structure de la solution dans         *
- *                     laquelle stocker les informations     *
- *************************************************************/
+/******************************************************************************************************************************
+ * @fn		evaluer																		                                      *
+ *																														      *
+ * @brief	Calcule les dates de debut de toutes les operations et indique leur pere dans les champs de la structure de		  *  	 
+ *			solution passee en parametre par rapport au graphe donne en parametre et d'un vecteur de Bierwith determine       * 
+ *			a l'avance																									      *
+ * @param	g	:	structure du graphe considere																			  *
+ * @param	s	:	structure de la solution dans laquelle stocker les informations											  *
+ ******************************************************************************************************************************/
 void evaluer(t_solution& s, t_instance g) {
 	int i, j, m, p, q;
 	int mach, date;
@@ -222,21 +201,17 @@ void evaluer(t_solution& s, t_instance g) {
 }
 
 
-/*************************************************************
- * FONCTION recherche_locale                                 *
- *                                                           *
- * Realise une amelioration de type descente a partir d'une  *
- * premiere solution calculee grace au vecteur de Bierwith   *
- * renseigne dans la structure de solution donne en parametre*
- *                                                           *
- * Entrées :                                                 *
- *	- t_instance   g        : structure du graphe considere  *
- *  - t_solution & s        : structure de la solution dans  *
- *                            laquelle stocker les           *
- *                            informations et contenant le   *
- *                            premier vecteur de Bierwith    *
- *  - int          max_iter : nombre max d'iteration         *
- *************************************************************/
+/******************************************************************************************************************************
+ * @fn		recherche_locale																								  *
+ *																								                              *
+ * @brief	Realise une amelioration de type descente a partir d'une premiere solution calculee grace au vecteur de Bierwith  *
+ *			renseigne dans la structure de solution donne en parametre														  *
+ *																															  *
+ * @param	g			:	structure du graphe considere																	  *
+ * @param	s			:	structure de la solution dans laquelle stocker les informations et contenant le premier vecteur   *
+ *							de Bierwith																						  *
+ * @param	max_iter	:	nombre max d'iteration			         													      *
+ ******************************************************************************************************************************/
 void recherche_locale(t_solution& s, t_instance g, int n_max_iter) {
 	int        posi,
 		       posj,
@@ -343,19 +318,15 @@ void recherche_locale(t_solution& s, t_instance g, int n_max_iter) {
 }
 
 
-/*************************************************************
- * FONCTION hashage                                          *
- *                                                           *
- * Calcule le hash de la solution passee en parametre        *
- *                                                           *
- * Entrées :                                                 *
- *	- t_instance   g : structure du graphe considere         *
- *  - t_solution & s : structure de la solution dont il faut *
- *                     calculer le hash                      *
- *                                                           *
- * Sortie :                                                  *
- *  - int        res : hash de la solution consideree        *
- *************************************************************/
+/******************************************************************************************************************************
+ * @fn		hashage																										      *
+ *																															  *
+ * @brief	Calcule le hash de la solution passee en parametre															      *
+ *																															  *
+ * @param	g	:	structure du graphe considere																			  *
+ * @param	s	:	structure de la solution dont il faut calculer le hash									                  *
+ * @return	res :	hash de la solution consideree																		      *
+ ******************************************************************************************************************************/
 int hashage(t_solution s, t_instance g) {
 	int res = 0;
 	
@@ -372,17 +343,14 @@ int hashage(t_solution s, t_instance g) {
 }
 
 
-/*************************************************************
- * FONCTION permut                                           *
- *                                                           *
- * Realise une permutation simple du vecteur de Bierwith     *
- * donne dans la structure de solution donnee en parametre   *
- *                                                           *
- * Entrées :                                                 *
- *	- t_instance   g : structure du graphe considere         *
- *  - t_solution & s : structure de la solution ou faire la  *
- *                     permutation                           *
- *************************************************************/
+/******************************************************************************************************************************
+ * @fn		permut													 														  *
+ *																															  *
+ * @brief	Realise une permutation simple du vecteur de Bierwith donne dans la structure de solution donnee en parametre     *
+ *																														      *
+ * @param	g	:	structure du graphe considere																			  *
+ * @param	s	:	structure de la solution ou faire la permutation												          *
+ ******************************************************************************************************************************/
 void permut(t_solution & s, t_instance g) {
 	int save;
 	int rand1 = rand() % (g.n * g.m);
@@ -400,20 +368,17 @@ void permut(t_solution & s, t_instance g) {
 }
 
 
-/*************************************************************
- * FONCTION grasp                                            *
- *                                                           *
- * Fonction qui parcourre l'espace de maniere efficace pour  *
- * trouver la solution optimale                              *
- *                                                           *
- * Entrées :                                                 *
- *	- t_instance   g          : structure du graphe considere*
- *  - t_solution & s          : structure de la solution     *
- *  - int          nb_iter    : nombre max d'iteration       *
- *  - int          nb_voisins : nombre de voisins a chercher *
- *  - int          nb_els     : nombre max de recherche des  *
- *                              voisins                      *
- *************************************************************/
+/******************************************************************************************************************************
+ * @fn		grasp																			                                  *
+ *																															  *
+ * @brief	Fonction qui parcourre l'espace de maniere efficace pour trouver la solution optimale                             *
+ *																														      *
+ * @param	g			:	structure du graphe considere																	  *
+ * @param	s			:	structure de la solution																		  *
+ * @param	nb_iter		:	nombre max d'iteration																			  *
+ * @param	nb_voisins	:	nombre de voisins a chercher																	  *
+ * @param	nb_els		:	nombre max de recherche des voisins																  *
+ ******************************************************************************************************************************/
 void grasp(t_solution& s, t_instance g, int nb_iter, int nb_els, int nb_voisins) {
 	t_solution best_voisin;
 	int        voisins;
