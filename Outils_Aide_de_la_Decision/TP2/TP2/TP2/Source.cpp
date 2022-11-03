@@ -373,7 +373,7 @@ void permut(t_solution & s, t_instance g) {
 /******************************************************************************************************************************
  * @fn		grasp																			                                  *
  *																															  *
- * @brief	Fonction qui parcourre l'espace de maniere efficace pour trouver la solution optimale                             *
+ * @brief	Fonction qui parcoure l'espace de maniere efficace pour trouver la solution optimale                             *
  *																														      *
  * @param	g			:	structure du graphe considere																	  *
  * @param	s			:	structure de la solution																		  *
