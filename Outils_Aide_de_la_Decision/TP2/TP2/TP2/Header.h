@@ -15,8 +15,8 @@ const int K = 100000;
  * @brief	Structure de graphe
  * @param	n			->	Nombre de pieces
  * @param	m			->	Nombre de machines
- * @param	p[][]		->	Piece, Temps de traitement
- * @param	mach[][]	->	Piece, Machine
+ * @param	p[][]		->	Machine pour le piece
+ * @param	mach[][]	->	Temps de traitement pour le piece dans le machine
  **/
 typedef struct t_instance {
 	int n;
@@ -32,7 +32,7 @@ typedef struct t_instance {
  * @param	t[][]			->	
  * @param	pere[][][2]		->	Sommet pere
  * @param	vb[]			->	
- * @param	pere_etoile[]	->	Piece, Machine
+ * @param	pere_etoile[]	->	Dernier sommet
  **/
 typedef struct t_solution {
 	int cout;

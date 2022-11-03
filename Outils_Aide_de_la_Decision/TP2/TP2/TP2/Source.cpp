@@ -128,8 +128,8 @@ void verifier_vecteur(t_solution s, t_instance g) {
 /******************************************************************************************************************************
  * @fn		evaluer																		                                      *
  *																														      *
- * @brief	Calcule les dates de debut de toutes les operations et indique leur pere dans les champs de la structure de		  *  	 
- *			solution passee en parametre par rapport au graphe donne en parametre et d'un vecteur de Bierwith determine       * 
+ * @brief	Calcule les dates de debut de toutes les operations et indique leur pere dans les champs de la structure de		  *
+ *			solution passee en parametre par rapport au graphe donne en parametre et d'un vecteur de Bierwith determine       *
  *			a l'avance																									      *
  *																															  *
  * @param	g	:	structure du graphe considere																			  *
