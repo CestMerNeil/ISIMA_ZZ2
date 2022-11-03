@@ -1,4 +1,7 @@
-﻿  TP2.cpp
+﻿  Source.cpp
+C:\Users\aoxie\Desktop\CodeDeAoXIE\ISIMA_ZZ2\Outils_Aide_de_la_Decision\TP2\TP2\TP2\Source.cpp(223,10): warning C4101: 'piece' : variable locale non référencée
+C:\Users\aoxie\Desktop\CodeDeAoXIE\ISIMA_ZZ2\Outils_Aide_de_la_Decision\TP2\TP2\TP2\Source.cpp(224,10): warning C4101: 'machine' : variable locale non référencée
+  TP2.cpp
 C:\Users\aoxie\Desktop\CodeDeAoXIE\ISIMA_ZZ2\Outils_Aide_de_la_Decision\TP2\TP2\TP2\TP2.cpp(10,15): warning C4244: 'argument' : conversion de 'time_t' en 'unsigned int', perte possible de données
-C:\Users\aoxie\Desktop\CodeDeAoXIE\ISIMA_ZZ2\Outils_Aide_de_la_Decision\TP2\TP2\TP2\TP2.cpp(13,16): warning C4101: 'best' : variable locale non référencée
+  Génération de code en cours...
   TP2.vcxproj -> C:\Users\aoxie\Desktop\CodeDeAoXIE\ISIMA_ZZ2\Outils_Aide_de_la_Decision\TP2\TP2\Debug\TP2.exe

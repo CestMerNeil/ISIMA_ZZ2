@@ -10,7 +10,7 @@ int main()
     srand(time(NULL));
     t_instance g;
     t_solution s;
-    t_solution best;
+    //t_solution best;
     lire_fichier(g, "C:/Users/aoxie/Desktop/CodeDeAoXIE/ISIMA_ZZ2/Outils_Aide_de_la_Decision/TP2/truela01.txt");
     printf("before\n");
     bierwith(g, s);
@@ -26,7 +26,7 @@ int main()
 
     for (int i = 1; i <= g.n; i++) {
         for (int j = 1; j <= g.m; j++) {
-            printf("pere de [%d][%d] = [%d] [%d]\n", i, j, s.pere[i][j][0], s.pere[i][j][1]);
+            printf("pere de [%d][%d] = [%d][%d]\n", i, j, s.pere[i][j][0], s.pere[i][j][1]);
         }
     }
 
