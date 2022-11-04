@@ -17,7 +17,8 @@ int main()
     verifier_vecteur(s, g);
 
     for (int i = 0; i < g.n * g.m; i++) {
-        printf("%d ", s.vb[i]);
+        printf("%d\t", s.vb[i]);
+        if ((i+1)%5 == 0) printf("\n");
     }
 
     printf("\n");
@@ -38,7 +39,8 @@ int main()
     recherche_locale(s, g, 2000);
 
     for (int i = 0; i < g.n * g.m; i++) {
-        printf("%d ", s.vb[i]);
+        printf("%d\t", s.vb[i]);
+        if ((i + 1) % 5 == 0) printf("\n");
     }
     printf("\n");
     for (int i = 1; i <= g.n; i++) {
@@ -56,7 +58,8 @@ int main()
     grasp(s, g, 100, 10, 10);
 
     for (int i = 0; i < g.n * g.m; i++) {
-        printf("%d ", s.vb[i]);
+        printf("%d\t", s.vb[i]);
+        if ((i + 1) % 5 == 0) printf("\n");
     }
     printf("\n");
     for (int i = 1; i <= g.n; i++) {
