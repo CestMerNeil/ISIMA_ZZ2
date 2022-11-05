@@ -1,0 +1,34 @@
+\documentclass[11pt]{ctexart}
+\usepackage[top=2cm, bottom=2cm, left=2.5cm, right=2.5cm]{geometry} %定义页边距
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{amsmath} %数学公式
+\floatname{algorithm}{Algorithm} %算法
+\renewcommand{\algorithmicrequire}{\textbf{Input:}} %输入
+\renewcommand{\algorithmicensure}{\textbf{Output:}} %输出
+\begin{document}
+\renewcommand{\thealgorithm}{1} %这里用来定义算法1，算法2等
+    \begin{algorithm}
+        \caption{simPi()} %标题
+        \begin{algorithmic}[1] %每行显示行号，1表示每1行进行显示
+            \Require $TimesOfCalcul$
+            \Ensure $Pi$
+            \State $CountIn \leftarrow 0$
+            \State $CountOut \leftarrow 0$
+            \For{$i \to TimesOfCalcul$}
+                \State $x \leftarrow random$
+                \State $y \leftarrow random$
+                \State $CountOut ++$
+                \If{$x^2+y^2\le1$}
+                    \State $CountIn++$
+                \EndIf
+                \State $Pi \leftarrow (4 \ast CountIn)/CountOut $
+            \EndFor
+        \end{algorithmic}
+    \end{algorithm}
+
+\end{document}
+
+ 
+

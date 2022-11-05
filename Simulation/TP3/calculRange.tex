@@ -1,0 +1,33 @@
+\documentclass[11pt]{ctexart}
+\usepackage[top=2cm, bottom=2cm, left=2.5cm, right=2.5cm]{geometry} %定义页边距
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{amsmath} %数学公式
+\floatname{algorithm}{Algorithm} %算法
+\renewcommand{\algorithmicrequire}{\textbf{Input:}} %输入
+\renewcommand{\algorithmicensure}{\textbf{Output:}} %输出
+\begin{document}
+\renewcommand{\thealgorithm}{3} %这里用来定义算法1，算法2等
+    \begin{algorithm}
+        \caption{calculRange()} %标题
+        \begin{algorithmic}[1] %每行显示行号，1表示每1行进行显示
+            \Require $TimesOfCalcul$
+            \Ensure $ConfidenceInterval$
+            \State $T \Leftarrow TimesOfCalcul$
+            \State $avgPi \leftarrow 0$
+            \State $sumPi \leftarrow 0$
+            \For{$i \to TimesOfCalcul$}
+                \State $avgPi \leftarrow simPi()$
+                \State $sumPi \leftarrow sumPi + avgPi$
+            \EndFor
+            \For{$i \to TimesOfCalcul$}
+                \State $S \leftarrow S+(avgPi-(sumPi/TimeOfCalcul))^2$
+            \EndFor
+            \State $S \leftarrow S/(TimesOfCalcul-1)$
+            \State $S \leftarrow \sqrt S$
+            \State $ConfidenceInterval \leftarrow S \ast T$
+        \end{algorithmic}
+    \end{algorithm}
+
+\end{document}
