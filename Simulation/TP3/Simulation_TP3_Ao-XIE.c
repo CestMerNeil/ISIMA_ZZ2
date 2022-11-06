@@ -6,10 +6,10 @@
 
 #define TIME 1000000
 
-
- /** ----------------------------------------------------------------------------------------------------------------------------------- *
-  * @todo       Prepare the generator of random numbers, It's MT in the second lab.                                                      *
-  * ------------------------------------------------------------------------------------------------------------------------------------ */
+ /** ------------------------------------------------------------------- *
+   * @todo       Prepare the generator of random numbers, It's MT in the *
+   *             second lab.                                             *
+   * ------------------------------------------------------------------- */
 /* Period parameters */  
 #define N 624
 #define M 397
@@ -112,10 +112,12 @@ double genrand_real2(void)
  
  /** ------------------------------------------------------------------- *
    * @fn         simPi                                                   *
+   *                                                                     *
    * @brief      Calcul value of Pi with the Monte Carlo Simulation      *
+   * @todo       It's for the question ONE                               *
+   *                                                                     *
    * @param      times   Times of calcul.                                *
    * @return     Value of Pi                                             *
-   * @todo       It's for the question ONE                               *
    * ------------------------------------------------------------------- */
 double simPi(double times)
 {
@@ -124,7 +126,6 @@ double simPi(double times)
     double y;
     double countIn = 0;
     double countOut = 0;
-    //char label[] = "\\/\\/";
 
     for(int i=1; i<=times; i++)
     {
@@ -135,39 +136,33 @@ double simPi(double times)
         {
             countIn += 1;
         }
-        //printf("Processing %.0lf times:[%c][%.2f%%]\r", times, label[i%4], (double)i/times*100);
-        //fflush(stdout);
     }
-    //putchar('\n');
 
     Pi = (4 * countIn) / countOut;
-    //printf("%.0lf times have done\n", times);
 
     return Pi;
 }
 
  /** ------------------------------------------------------------------- *
    * @fn         avgPi                                                   *
+   *                                                                     *
    * @brief      Using the simPi() function, multiple calculations are   *
    *             averaged to get a more accurate value.                  *
+   * @todo       It's for the question TWO                               *
+   *                                                                     *
    * @param      times   Times of calcul.                                *
    * @return     Value of Pi                                             *
-   * @todo       It's for the question TWO                               *
    * ------------------------------------------------------------------- */
 double avgPi(double times)
 {
     double avgPi = 0;
     double sumPi = 0;
-    //char label[] = "\\/\\/";
 
     for(int i=0; i<times; i++)
     {
         avgPi = simPi(TIME);
         sumPi += avgPi;
-        //printf("Processing %.0lf times:[%c][%.2f%%]\r", times, label[i%4], (double)i/times*100);
-        //fflush(stdout);
     }
-    //putchar('\n');
 
     return sumPi / times;
 
@@ -176,7 +171,7 @@ double avgPi(double times)
  /** ------------------------------------------------------------------- *
    * @fn         calculRange                                             *
    *                                                                     *
-   * @brief      Calculate confidence interval.                          *
+   * @brief      Calculate confidence interval for a 95%                 *
    * @todo       It's for the first part of question THREE               *
    *                                                                     *
    * @param      times   Times of calcul.                                *
@@ -312,10 +307,12 @@ double calculRange(int n)
 
  /** ------------------------------------------------------------------- *
    * @fn         calculRange                                             *
+   *                                                                     *
    * @brief      Only random results for confidence regions are collected*
+   * @todo       It's for the second part of question THREE              *
+   *                                                                     *
    * @param      times   Times of calcul.                                *
    * @return     Value of Pi                                             *
-   * @todo       It's for the second part of question THREE              *
    * ------------------------------------------------------------------- */
 double MonteCarlo(double times)
 {
@@ -326,14 +323,13 @@ double MonteCarlo(double times)
     while(count <= times)
     {
         valAvgPi = avgPi(times);
-        if(valAvgPi < M_PI + calculRange(times) && valAvgPi > M_PI - calculRange(times))
+        if(valAvgPi < M_PI+calculRange(times) && valAvgPi > M_PI-calculRange(times))
         {
             sum += valAvgPi;
             count++;
         }
     }
     return sum/count;
-
 }
 
 int main()
