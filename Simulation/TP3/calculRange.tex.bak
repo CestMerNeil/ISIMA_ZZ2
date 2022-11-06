@@ -14,9 +14,9 @@
         \begin{algorithmic}[1] %每行显示行号，1表示每1行进行显示
             \Require $TimesOfCalcul$
             \Ensure $ConfidenceInterval$
+            \State $T \Leftarrow TimesOfCalcul$
             \State $avgPi \leftarrow 0$
             \State $sumPi \leftarrow 0$
-            \State $T \Leftarrow TimesOfCalcul$
             \For{$i \to TimesOfCalcul$}
                 \State $avgPi \leftarrow simPi()$
                 \State $sumPi \leftarrow sumPi + avgPi$
