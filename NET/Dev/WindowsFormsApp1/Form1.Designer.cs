@@ -49,10 +49,10 @@ namespace WindowsFormsApp1
             this.radioButtonAlpha = new System.Windows.Forms.RadioButton();
             this.radioButtonChrono = new System.Windows.Forms.RadioButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -262,6 +262,16 @@ namespace WindowsFormsApp1
             this.splitContainer1.SplitterDistance = 399;
             this.splitContainer1.TabIndex = 23;
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(63, 86);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.Size = new System.Drawing.Size(294, 217);
+            this.richTextBox1.TabIndex = 26;
+            this.richTextBox1.Text = "qgfqs dfq d";
+            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.radioButtonAlpha);
@@ -294,15 +304,6 @@ namespace WindowsFormsApp1
             this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(63, 86);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(294, 217);
-            this.richTextBox1.TabIndex = 26;
-            this.richTextBox1.Text = "";
             // 
             // Form1
             // 

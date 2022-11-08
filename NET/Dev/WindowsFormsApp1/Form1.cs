@@ -19,6 +19,7 @@ namespace WindowsFormsApp1
             InitializeComponent();
             radioButtonEtudiant.Checked = true;
             radioButtonAlpha.Checked = true;
+            
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -36,6 +37,7 @@ namespace WindowsFormsApp1
             if (textBoxNom.TextLength == 0 || textBoxAge.TextLength == 0 || textBoxClasse.TextLength == 0 || textBoxPrenom.TextLength == 0)
             {
                 //display message
+                richTextBox1.Text = "you halqjflqijfem";
             }
             //il faut chercher "classe"
             else
@@ -97,7 +99,7 @@ namespace WindowsFormsApp1
 
         private void textBoxClasse_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void classe_Click(object sender, EventArgs e)
@@ -111,6 +113,11 @@ namespace WindowsFormsApp1
             {
                 classe.Text = "Matiere : ";
             }
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 

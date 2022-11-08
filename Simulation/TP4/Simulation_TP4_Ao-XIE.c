@@ -28,9 +28,6 @@ void init_genrand(unsigned long s)
         /* only MSBs of the array mt[].                        */
         /* 2002/01/09 modified by Makoto Matsumoto             */
         mt[mti] &= 0xffffffffUL;
-        /* for >32 bit machines */
-    }
-}
 
 /* initialize by an array with array-length */
 /* init_key is the array for initializing keys */
