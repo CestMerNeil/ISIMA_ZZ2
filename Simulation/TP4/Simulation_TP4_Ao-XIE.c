@@ -138,7 +138,8 @@ int NumLittle()
 
 void PreThisYear(Rabbit r)
 {
-    r.timeP
+    r.timePrYear = (2 * genrand_int32) + 6;
+    
 }
 
 int main()
