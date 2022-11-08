@@ -130,6 +130,13 @@ void RabbitSwarmAlgo()
 int NumLittle()
 {
     return (3 * genrand_int32()) + 3;
+    
+}
+
+void PreThisYear(Rabbit r)
+{
+    r.timePrYear = (2 * genrand_int32) + 6;
+    
 }
 
 int main()
