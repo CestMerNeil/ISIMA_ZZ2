@@ -221,7 +221,7 @@ int timeSexualMat(void)
 double calculChanceSurvival(int ageRabbit, int sexualMat)
 {
     double chanceSurvival;
-
+    /*
     if(sexualMat < ageRabbit)
     {
         chanceSurvival = 0.35 * genrand_int32();
@@ -238,6 +238,8 @@ double calculChanceSurvival(int ageRabbit, int sexualMat)
             chanceSurvival = chanceSurvival / 100.0 * genrand_int32();
         }
     }
+    */
+    chanceSurvival = genrand_int32();
 
     return chanceSurvival;
 }
