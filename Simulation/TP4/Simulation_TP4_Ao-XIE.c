@@ -90,7 +90,7 @@ void RealRabbit()
             FR[i].age++;
         }
 
-        // Update the chance of daath
+        // Update the chance of death
         for(int i=0; i<countMR; i++)
         {
             MR[i].dieRate = calculChanceSurvival(MR[i].age, MR[i].sexualMat);
@@ -129,7 +129,7 @@ void RealRabbit()
         // All in all, calculate the number of rabbits suitable for childbirth
         for(int i=0; i<countFR; i++)
         {
-            if(FR[i].sexualMat >= FR[i].age)
+            if(FR[i].sexualMat <= FR[i].age)
             {
                 countFR_CHILDBITRH++;
             }
@@ -142,18 +142,18 @@ void RealRabbit()
             int sex = judgeGender();
             if(sex == 1)
             {
-                MR[countMR].age = 0;
-                MR[countMR].sexualMat = timeSexualMat();
-                MR[countMR].survive = 1;
-                MR[countMR].dieRate = calculChanceSurvival(FR[countMR].age, FR[countMR].sexualMat);
+                MR[countMR_MEM].age = 0;
+                MR[countMR_MEM].sexualMat = timeSexualMat();
+                MR[countMR_MEM].survive = 1;
+                MR[countMR_MEM].dieRate = calculChanceSurvival(FR[countMR_MEM].age, FR[countMR_MEM].sexualMat);
                 countMR_MEM++;
             }
             if(sex == 0)
             {
-                FR[countFR].age = 0;
-                FR[countFR].sexualMat = timeSexualMat();
-                FR[countFR].survive = 1;
-                FR[countFR].dieRate = calculChanceSurvival(FR[countFR].age, FR[countFR].sexualMat);
+                FR[countFR_MEM].age = 0;
+                FR[countFR_MEM].sexualMat = timeSexualMat();
+                FR[countFR_MEM].survive = 1;
+                FR[countFR_MEM].dieRate = calculChanceSurvival(FR[countFR_MEM].age, FR[countFR_MEM].sexualMat);
                 countFR_MEM++;
             }
         }
@@ -184,7 +184,7 @@ void RealRabbit()
         countMR = countMR_MEM;
         countFR = countFR_MEM;
 
-        printf("In the %deme month, we have %d male rabbits and %d female rabbits", month, countMR, countFR);
+        printf("In the %d\teme month, we have %d\tmale rabbits and %d\tfemale rabbits\n", month, countMR, countFR);
     }
 
 }
@@ -201,8 +201,14 @@ int judgeGender(void)
     double random;
 
     random = genrand_int32();
-    if(random < 0.5){sex = 1;}
-    else{sex = 0;}
+    if(random < 0.5)
+    {
+        sex = 1;
+        }
+    else
+    {
+        sex = 0;
+    }
 
     return sex;
 }

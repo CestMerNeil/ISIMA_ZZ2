@@ -17,7 +17,7 @@ int timeSexualMat(void);
 double calculChanceSurvival(int ageRabbit, int sexualMat);
 
 #define NB_MAX 1000000
-#define DURATION 20
+#define DURATION 100
 #define NUMRABBITSTART 10
 
 struct MR
