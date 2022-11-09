@@ -98,3 +98,42 @@ double genrand_real2(void)
     return genrand_int32()*(1.0/4294967296.0); 
     /* divided by 2^32 */
 }
+
+ /** ----------------------------------------------------------------------------------------------------------------------------------- *
+   * @fn        BoxMuller                                                                                                                *
+   * @brief     A high quality random number generator                                                                                   *
+   * @param     mean    Generate the middle of the range                                                                                 *
+   * @param     stdc    Generate range                                                                                                   *                                    
+   * @return    A random number                                                                                                          *
+   * @todo      It's for the question FIVE PART TWO                                                                                      *
+   * ----------------------------------------------------------------------------------------------------------------------------------- */
+double BoxMuller(double mean, double stdc)
+{
+    double v1 = 0;
+    double v2 = 0;
+    double s = 0;
+    int phase = 0;
+    double x;
+    if(phase == 0)
+    {
+        do
+        {
+            double u1 = genrand_real2() / RAND_MAX;
+            double u2 = genrand_real2() / RAND_MAX;
+
+            v1 = 2 * u1 - 1;
+            v2 = 2 * u2 - 1;
+            s = v1 * v1 + v2 * v2;
+        }while(s >= 1 || s ==0);
+
+        x = v1 * sqrt(-2 * log(s) / s);
+    }
+    else
+    {
+        x = v2 * sqrt(-2 * log(s) / s);
+    }
+
+    phase = 1 - phase;
+
+    return mean + x * stdc;
+}

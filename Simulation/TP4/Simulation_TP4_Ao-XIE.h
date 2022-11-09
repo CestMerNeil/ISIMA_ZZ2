@@ -2,6 +2,7 @@
 #include <math.h>
 #include <stdlib.h> 
 #include <string.h>
+#include "Random.c"
 
 #define NB_MAX 9999999999
 #define DURATION 20
