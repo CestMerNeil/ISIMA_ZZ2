@@ -1,5 +1,15 @@
 #include "Simulation_TP4_Ao-XIE.h"
 
+double BoxMuller(double mean, double stdc);
+void init_genrand(unsigned long s);
+void init_by_array(unsigned long init_key[], int key_length);
+unsigned long genrand_int32(void);
+long genrand_int31(void);
+double genrand_real1(void);
+double genrand_real2(void);
+double genrand_real3(void);
+double genrand_res53(void);
+
 #define SizeRabbit 40
 
  /** ------------------------------------------------------------------- *
@@ -38,6 +48,7 @@ void RealRabbit()
     int countMR_MEM = NUMRABBITSTART;
     int countFR = NUMRABBITSTART; // number of female rabbits
     int countFR_MEM = NUMRABBITSTART;
+    int countFR_CHILDBITRH = 0; // number of female rabbits suitable for childbirth
 
     // In the first month, there was 5 male rabbits and 5 female rabbits by default
     for(int i=0; i<NUMRABBITSTART; i++)
@@ -123,8 +134,67 @@ void RealRabbit()
 
         /* Calculate fertility*/
         // For rabbits, the number of males and females isn't taken into account
+        // So, it have to use countFR and countFR_MEM for calcul
 
+        // All in all, calculate the number of rabbits suitable for childbirth
+        for(int i=0; i<countFR; i++)
+        {
+            if(FR[i].sexualMat >= FR[i].age)
+            {
+                countFR_CHILDBITRH++;
+            }
+        }
 
+        // In this programme, fertility rate is not taken into account
+        // Suppose each female of school age gives birth to one rabbit
+        for(int i=0; i<countFR_CHILDBITRH; i++)
+        {
+            int sex = judgeGender();
+            if(sex == 1)
+            {
+                MR[countMR].age = 0;
+                MR[countMR].sexualMat = timeSexualMat();
+                MR[countMR].survive = 1;
+                MR[countMR].dieRate = calculChanceSurvival(FR[countMR].age, FR[countMR].sexualMat);
+                countMR_MEM++;
+            }
+            if(sex == 0)
+            {
+                FR[countFR].age = 0;
+                FR[countFR].sexualMat = timeSexualMat();
+                FR[countFR].survive = 1;
+                FR[countFR].dieRate = calculChanceSurvival(FR[countFR].age, FR[countFR].sexualMat);
+                countFR_MEM++;
+            }
+        }
+
+        // Synchronisation number the rabbits
+        countMR = countMR_MEM;
+        countFR = countFR_MEM;
+
+        // Delete the rabbit that died in the first month
+        for(int i=0; i<countMR; i++)
+        {
+            if(MR[i].dieRate < 0.5)
+            {
+                countMR_MEM--;
+                MR[i].survive = 0;
+            }
+        }
+        for(int i=0; i<countFR; i++)
+        {
+            if(FR[i].dieRate < 0.5)
+            {
+                countFR_MEM--;
+                FR[i].survive = 0;
+            }
+        }
+
+        // Synchronisation number the rabbits
+        countMR = countMR_MEM;
+        countFR = countFR_MEM;
+
+        printf("In the %deme month, we have %d male rabbits and %d female rabbits", month, countMR, countFR);
     }
 
 }
@@ -186,6 +256,8 @@ int main()
 
     /* Inisiation for those values */
 
+    RealRabbit();
+
     return EXIT_SUCCESS;
 }
 
@@ -216,6 +288,9 @@ void init_genrand(unsigned long s)
         /* only MSBs of the array mt[].                        */
         /* 2002/01/09 modified by Makoto Matsumoto             */
         mt[mti] &= 0xffffffffUL;
+        /* for >32 bit machines */
+    }
+}
 
 /* initialize by an array with array-length */
 /* init_key is the array for initializing keys */
@@ -284,12 +359,40 @@ unsigned long genrand_int32(void)
     return y;
 }
 
+/* generates a random number on [0,0x7fffffff]-interval */
+long genrand_int31(void)
+{
+    return (long)(genrand_int32()>>1);
+}
+
+/* generates a random number on [0,1]-real-interval */
+double genrand_real1(void)
+{
+    return genrand_int32()*(1.0/4294967295.0); 
+    /* divided by 2^32-1 */ 
+}
+
 /* generates a random number on [0,1)-real-interval */
 double genrand_real2(void)
 {
     return genrand_int32()*(1.0/4294967296.0); 
     /* divided by 2^32 */
 }
+
+/* generates a random number on (0,1)-real-interval */
+double genrand_real3(void)
+{
+    return (((double)genrand_int32()) + 0.5)*(1.0/4294967296.0); 
+    /* divided by 2^32 */
+}
+
+/* generates a random number on [0,1) with 53-bit resolution*/
+double genrand_res53(void) 
+{ 
+    unsigned long a=genrand_int32()>>5, b=genrand_int32()>>6; 
+    return(a*67108864.0+b)*(1.0/9007199254740992.0); 
+} 
+/* These real versions are due to Isaku Wada, 2002/01/09 added */
 
  /** ----------------------------------------------------------------------------------------------------------------------------------- *
    * @fn        BoxMuller                                                                                                                *

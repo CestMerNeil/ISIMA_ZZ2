@@ -2,7 +2,6 @@
 #include <math.h>
 #include <stdlib.h> 
 #include <string.h>
-#include "Random.c"
 
 #define NB_MAX 9999999999
 #define DURATION 20
@@ -16,7 +15,6 @@ struct Rabbit
     int sexualMat; // time of sexMat
     int survive; // Surviving state
     double dieRate; // Chance of death
-    int timePrYear;
 }MR[NB_MAX];
 
 struct Rabbit
@@ -27,5 +25,4 @@ struct Rabbit
     int sexualMat; // time of sexMat
     int survive; // Surviving state
     double dieRate;
-    int timePrYear;
 }FR[NB_MAX];
