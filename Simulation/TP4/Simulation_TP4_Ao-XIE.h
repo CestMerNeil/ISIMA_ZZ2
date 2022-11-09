@@ -16,7 +16,7 @@ int judgeGender(void);
 int timeSexualMat(void);
 double calculChanceSurvival(int ageRabbit, int sexualMat);
 
-#define NB_MAX 9999999999
+#define NB_MAX 1000000
 #define DURATION 20
 #define NUMRABBITSTART 10
 
