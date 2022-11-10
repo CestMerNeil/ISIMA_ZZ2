@@ -1,6 +1,5 @@
 #include "Simulation_TP4_Ao-XIE.h"
 
-#define SizeRabbit 40
 
  /** ------------------------------------------------------------------- *
    * @fn         RabbitSwarmAlgo                                         *
@@ -27,7 +26,7 @@ void RabbitSwarmAlgo()
 }
 
  /** ------------------------------------------------------------------- *
-   * @fn         RabbitSwarmAlgo                                         *
+   * @fn         RealRabbit                                         *
    *                                                                     *
    * @brief            *
    * @todo       It's for the question TWO                               *
@@ -49,9 +48,6 @@ void RealRabbit()
         MR[i].sexualMat = timeSexualMat();
         FR[i].sexualMat = timeSexualMat();
 
-        MR[i].survive = 1;
-        FR[i].survive = 1;
-
         MR[i].dieRate = calculChanceSurvival(MR[i].age, MR[i].sexualMat);
         FR[i].dieRate = calculChanceSurvival(FR[i].age, FR[i].sexualMat);
     }
@@ -59,24 +55,24 @@ void RealRabbit()
     // Delete the rabbit that died in the first month
     for(int i=0; i<countMR; i++)
     {
-        if(MR[i].dieRate < 0.5)
+        if(MR[i].dieRate == 0)
         {
             countMR_MEM--;
-            MR[i].survive = 0;
         }
     }
     for(int i=0; i<countFR; i++)
     {
-        if(FR[i].dieRate < 0.5)
+        if(FR[i].dieRate == 0)
         {
             countFR_MEM--;
-            FR[i].survive = 0;
         }
     }
 
     // Synchronisation number the rabbits
     countMR = countMR_MEM;
     countFR = countFR_MEM;
+
+    printf("In the 1\teme month, we have %d\tmale rabbits and %d\tfemale rabbits\n", countMR_MEM, countFR_MEM);
 
     for(int month = 2; month <= DURATION; month++)
     {
@@ -103,18 +99,16 @@ void RealRabbit()
         // Delete the rabbit died
         for(int i=0; i<countMR; i++)
         {
-            if(MR[i].dieRate < 0.5)
+            if(MR[i].dieRate == 0)
             {
                 countMR_MEM--;
-                MR[i].survive = 0;
             }
         }
         for(int i=0; i<countFR; i++)
         {
-            if(FR[i].dieRate < 0.5)
+            if(FR[i].dieRate == 0)
             {
                 countFR_MEM--;
-                FR[i].survive = 0;
             }
         }
 
@@ -129,9 +123,9 @@ void RealRabbit()
         // All in all, calculate the number of rabbits suitable for childbirth
         for(int i=0; i<countFR; i++)
         {
-            if(FR[i].sexualMat <= FR[i].age)
+            if(FR[i].sexualMat <= FR[i].age && countMR != 0)
             {
-                countFR_CHILDBITRH++;
+                countFR_CHILDBITRH+=5;
             }
         }
 
@@ -142,17 +136,15 @@ void RealRabbit()
             int sex = judgeGender();
             if(sex == 1)
             {
-                MR[countMR_MEM].age = 0;
+                MR[countMR_MEM].age = 1;
                 MR[countMR_MEM].sexualMat = timeSexualMat();
-                MR[countMR_MEM].survive = 1;
                 MR[countMR_MEM].dieRate = calculChanceSurvival(FR[countMR_MEM].age, FR[countMR_MEM].sexualMat);
                 countMR_MEM++;
             }
             if(sex == 0)
             {
-                FR[countFR_MEM].age = 0;
+                FR[countFR_MEM].age = 1;
                 FR[countFR_MEM].sexualMat = timeSexualMat();
-                FR[countFR_MEM].survive = 1;
                 FR[countFR_MEM].dieRate = calculChanceSurvival(FR[countFR_MEM].age, FR[countFR_MEM].sexualMat);
                 countFR_MEM++;
             }
@@ -161,30 +153,29 @@ void RealRabbit()
         // Synchronisation number the rabbits
         countMR = countMR_MEM;
         countFR = countFR_MEM;
-
-        // Delete the rabbit that died in the first month
+        
+        
+        // Delete the rabbit that died in this month
         for(int i=0; i<countMR; i++)
         {
-            if(MR[i].dieRate < 0.5)
+            if(MR[i].dieRate == 0)
             {
                 countMR_MEM--;
-                MR[i].survive = 0;
             }
         }
         for(int i=0; i<countFR; i++)
         {
-            if(FR[i].dieRate < 0.5)
+            if(FR[i].dieRate == 0)
             {
                 countFR_MEM--;
-                FR[i].survive = 0;
             }
         }
-
+        
         // Synchronisation number the rabbits
         countMR = countMR_MEM;
         countFR = countFR_MEM;
 
-        printf("In the %d\teme month, we have %d\tmale rabbits and %d\tfemale rabbits\n", month, countMR, countFR);
+        printf("In the %d\teme month, we have %d\tmale rabbits and %d\tfemale rabbits\n", month, countMR_MEM, countFR_MEM);
     }
 
 }
@@ -200,7 +191,7 @@ int judgeGender(void)
     int sex;
     double random;
 
-    random = genrand_int32();
+    random = genrand_real2();
     if(random < 0.5)
     {
         sex = 1;
@@ -215,61 +206,48 @@ int judgeGender(void)
 
 int timeSexualMat(void)
 {
-    return 3 * genrand_int32() + 5;
+    return 3 * genrand_real2() + 5;
 }
 
-double calculChanceSurvival(int ageRabbit, int sexualMat)
+ /** ------------------------------------------------------------------- *
+   * @fn         calculChanceSurvival                                         *
+   *                                                                     *
+   * @brief            *
+   * @return 1-> survive; 0 -> die                             *
+   * @todo
+   * ------------------------------------------------------------------- */
+int calculChanceSurvival(int ageRabbit, int sexualMat)
 {
     double chanceSurvival;
-    /*
-    if(sexualMat < ageRabbit)
+    double Outdo = 0;
+    int surviveState = 0;
+
+    chanceSurvival = genrand_real2();
+    if(sexualMat < ageRabbit) // For underage rabbits
     {
-        chanceSurvival = 0.35 * genrand_int32();
+        if(chanceSurvival<0.35) surviveState = 1;
     }
     else
     {   
-        if(ageRabbit < 120)
+        if(ageRabbit < 120) // For rabbits who are adults but not 10 years old
         {
-            chanceSurvival = 0.6 * genrand_int32();
+            if(chanceSurvival < 0.6) surviveState = 1;
         }
         else
         {
-            chanceSurvival = 50 - (ageRabbit - 120) * (50.0 / 60.0);
-            chanceSurvival = chanceSurvival / 100.0 * genrand_int32();
+            Outdo = ageRabbit - 120;
+            if(chanceSurvival < 0.5 - ((0.1 / 12) * Outdo)) surviveState = 1;
         }
     }
-    */
-    chanceSurvival = genrand_int32();
 
-    return chanceSurvival;
+    return surviveState;
 }
-
-
-
-int main()
-{
-    /* Inisiation for the ramdon generator */
-    unsigned long init[4]={0x123, 0x234, 0x345, 0x456}, length=4;
-    init_by_array(init, length);
-
-    /* Inisiation for those values */
-
-    RealRabbit();
-
-    return EXIT_SUCCESS;
-}
-
 
  /** ------------------------------------------------------------------- *
    * @todo       Prepare the generator of random numbers, It's MT in the *
    *             second lab.                                             *
    * ------------------------------------------------------------------- */
 /* Period parameters */  
-#define N 624
-#define M 397
-#define MATRIX_A 0x9908b0dfUL   /* constant vector a */
-#define UPPER_MASK 0x80000000UL /* most significant w-r bits */
-#define LOWER_MASK 0x7fffffffUL /* least significant r bits */
 
 static unsigned long mt[N]; /* the array for the state vector  */
 static int mti=N+1; /* mti==N+1 means mt[N] is not initialized */
@@ -429,4 +407,18 @@ double BoxMuller(double mean, double stdc)
     phase = 1 - phase;
 
     return mean + x * stdc;
+}
+
+
+int main()
+{
+    /* Inisiation for the ramdon generator */
+    unsigned long init[4]={0x123, 0x234, 0x345, 0x456}, length=4;
+    init_by_array(init, length);
+
+    /* Inisiation for those values */
+
+    RealRabbit();
+
+    return EXIT_SUCCESS;
 }
