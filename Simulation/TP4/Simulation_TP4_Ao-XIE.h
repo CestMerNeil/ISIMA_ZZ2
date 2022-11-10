@@ -20,7 +20,7 @@ double calculChanceSurvival(int ageRabbit, int sexualMat);
 #define DURATION 100
 #define NUMRABBITSTART 10
 
-struct MR
+struct MR // Male Rabbit
 {
     // Each time, we create a rabbit
     // Then, we have to init all the random number for this rabbit.
@@ -30,7 +30,7 @@ struct MR
     double dieRate; // Chance of death
 }MR[NB_MAX]={0};
 
-struct FR
+struct FR // Female Rabbit
 {
     // Each time, we create a rabbit
     // Then, we have to init all the random number for this rabbit.
