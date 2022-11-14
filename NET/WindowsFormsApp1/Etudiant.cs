@@ -25,9 +25,9 @@ namespace WindowsFormsApp1
             setClasse(classe);
         }
 
-        public String toString()
+        public override String ToString()
         {
-            return ((Personne) this).toString() + ", classe = " + getClasse();
+            return base.ToString() + ", classe : " + getClasse();
         }
     }
 }

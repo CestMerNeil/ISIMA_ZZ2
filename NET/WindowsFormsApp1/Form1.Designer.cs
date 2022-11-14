@@ -63,6 +63,7 @@ namespace WindowsFormsApp1
             // 
             // textBoxNom
             // 
+            this.textBoxNom.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.textBoxNom.Location = new System.Drawing.Point(97, 119);
             this.textBoxNom.Name = "textBoxNom";
             this.textBoxNom.Size = new System.Drawing.Size(219, 20);
@@ -83,14 +84,14 @@ namespace WindowsFormsApp1
             this.textBoxPrenom.Location = new System.Drawing.Point(499, 152);
             this.textBoxPrenom.Name = "textBoxPrenom";
             this.textBoxPrenom.Size = new System.Drawing.Size(219, 20);
-            this.textBoxPrenom.TabIndex = 3;
+            this.textBoxPrenom.TabIndex = 2;
             // 
             // textBoxAge
             // 
             this.textBoxAge.Location = new System.Drawing.Point(499, 187);
             this.textBoxAge.Name = "textBoxAge";
             this.textBoxAge.Size = new System.Drawing.Size(219, 20);
-            this.textBoxAge.TabIndex = 4;
+            this.textBoxAge.TabIndex = 3;
             // 
             // prenom
             // 
@@ -125,7 +126,7 @@ namespace WindowsFormsApp1
             this.textBoxClasse.Location = new System.Drawing.Point(499, 222);
             this.textBoxClasse.Name = "textBoxClasse";
             this.textBoxClasse.Size = new System.Drawing.Size(219, 20);
-            this.textBoxClasse.TabIndex = 7;
+            this.textBoxClasse.TabIndex = 4;
             this.textBoxClasse.TextChanged += new System.EventHandler(this.textBoxClasse_TextChanged);
             // 
             // radioButtonEtudiant
@@ -134,7 +135,7 @@ namespace WindowsFormsApp1
             this.radioButtonEtudiant.Location = new System.Drawing.Point(6, 17);
             this.radioButtonEtudiant.Name = "radioButtonEtudiant";
             this.radioButtonEtudiant.Size = new System.Drawing.Size(64, 17);
-            this.radioButtonEtudiant.TabIndex = 9;
+            this.radioButtonEtudiant.TabIndex = 5;
             this.radioButtonEtudiant.TabStop = true;
             this.radioButtonEtudiant.Text = "Etudiant";
             this.radioButtonEtudiant.UseVisualStyleBackColor = true;
@@ -146,7 +147,7 @@ namespace WindowsFormsApp1
             this.radioButtonProfesseur.Location = new System.Drawing.Point(90, 17);
             this.radioButtonProfesseur.Name = "radioButtonProfesseur";
             this.radioButtonProfesseur.Size = new System.Drawing.Size(75, 17);
-            this.radioButtonProfesseur.TabIndex = 10;
+            this.radioButtonProfesseur.TabIndex = 6;
             this.radioButtonProfesseur.TabStop = true;
             this.radioButtonProfesseur.Text = "Professeur";
             this.radioButtonProfesseur.UseVisualStyleBackColor = true;
@@ -157,7 +158,7 @@ namespace WindowsFormsApp1
             this.buttonEnregistrement.Location = new System.Drawing.Point(116, 387);
             this.buttonEnregistrement.Name = "buttonEnregistrement";
             this.buttonEnregistrement.Size = new System.Drawing.Size(171, 31);
-            this.buttonEnregistrement.TabIndex = 11;
+            this.buttonEnregistrement.TabIndex = 8;
             this.buttonEnregistrement.Text = "Enregistrement";
             this.buttonEnregistrement.UseVisualStyleBackColor = true;
             this.buttonEnregistrement.Click += new System.EventHandler(this.button1_Click);
@@ -167,18 +168,20 @@ namespace WindowsFormsApp1
             this.buttonEtudiant.Location = new System.Drawing.Point(20, 387);
             this.buttonEtudiant.Name = "buttonEtudiant";
             this.buttonEtudiant.Size = new System.Drawing.Size(99, 31);
-            this.buttonEtudiant.TabIndex = 19;
+            this.buttonEtudiant.TabIndex = 12;
             this.buttonEtudiant.Text = "Etudiant";
             this.buttonEtudiant.UseVisualStyleBackColor = true;
+            this.buttonEtudiant.Click += new System.EventHandler(this.buttonEtudiant_Click);
             // 
             // buttonProf
             // 
             this.buttonProf.Location = new System.Drawing.Point(159, 387);
             this.buttonProf.Name = "buttonProf";
             this.buttonProf.Size = new System.Drawing.Size(99, 31);
-            this.buttonProf.TabIndex = 18;
+            this.buttonProf.TabIndex = 12;
             this.buttonProf.Text = "Prof";
             this.buttonProf.UseVisualStyleBackColor = true;
+            this.buttonProf.Click += new System.EventHandler(this.buttonProf_Click);
             // 
             // buttonTous
             // 
@@ -188,6 +191,7 @@ namespace WindowsFormsApp1
             this.buttonTous.TabIndex = 17;
             this.buttonTous.Text = "Tous";
             this.buttonTous.UseVisualStyleBackColor = true;
+            this.buttonTous.Click += new System.EventHandler(this.buttonTous_Click);
             // 
             // label1
             // 
@@ -206,7 +210,7 @@ namespace WindowsFormsApp1
             this.radioButtonAncien.Location = new System.Drawing.Point(105, 19);
             this.radioButtonAncien.Name = "radioButtonAncien";
             this.radioButtonAncien.Size = new System.Drawing.Size(79, 17);
-            this.radioButtonAncien.TabIndex = 21;
+            this.radioButtonAncien.TabIndex = 10;
             this.radioButtonAncien.TabStop = true;
             this.radioButtonAncien.Text = "Ancienneté";
             this.radioButtonAncien.UseVisualStyleBackColor = true;
@@ -217,10 +221,11 @@ namespace WindowsFormsApp1
             this.radioButtonAlpha.Location = new System.Drawing.Point(0, 19);
             this.radioButtonAlpha.Name = "radioButtonAlpha";
             this.radioButtonAlpha.Size = new System.Drawing.Size(87, 17);
-            this.radioButtonAlpha.TabIndex = 20;
+            this.radioButtonAlpha.TabIndex = 9;
             this.radioButtonAlpha.TabStop = true;
             this.radioButtonAlpha.Text = "Alphabétique";
             this.radioButtonAlpha.UseVisualStyleBackColor = true;
+            this.radioButtonAlpha.CheckedChanged += new System.EventHandler(this.radioButtonAlpha_CheckedChanged);
             // 
             // radioButtonChrono
             // 
@@ -228,7 +233,7 @@ namespace WindowsFormsApp1
             this.radioButtonChrono.Location = new System.Drawing.Point(201, 19);
             this.radioButtonChrono.Name = "radioButtonChrono";
             this.radioButtonChrono.Size = new System.Drawing.Size(93, 17);
-            this.radioButtonChrono.TabIndex = 22;
+            this.radioButtonChrono.TabIndex = 11;
             this.radioButtonChrono.TabStop = true;
             this.radioButtonChrono.Text = "Chronologique";
             this.radioButtonChrono.UseVisualStyleBackColor = true;
@@ -269,7 +274,7 @@ namespace WindowsFormsApp1
             this.richTextBox1.ReadOnly = true;
             this.richTextBox1.Size = new System.Drawing.Size(294, 217);
             this.richTextBox1.TabIndex = 26;
-            this.richTextBox1.Text = "qgfqs dfq d";
+            this.richTextBox1.Text = "";
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // groupBox2

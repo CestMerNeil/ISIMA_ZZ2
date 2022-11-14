@@ -19,7 +19,8 @@ namespace WindowsFormsApp1
             InitializeComponent();
             radioButtonEtudiant.Checked = true;
             radioButtonAlpha.Checked = true;
-            
+            liste = new ListePersonne();
+            richTextBox1.Text = "Bonjour ! Veuillez saisir des informations";
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -29,7 +30,13 @@ namespace WindowsFormsApp1
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            MessageBox.Show("Bonjour");
+        }
+
+        private void textBoxAge_TextChanged(object sender, EventArgs e)
+        {
+            if (0 > Int32.Parse(textBoxAge.Text) || (Int32.Parse(textBoxAge.Text) > 100)){
+                MessageBox.Show("Bonjour");
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -37,19 +44,27 @@ namespace WindowsFormsApp1
             if (textBoxNom.TextLength == 0 || textBoxAge.TextLength == 0 || textBoxClasse.TextLength == 0 || textBoxPrenom.TextLength == 0)
             {
                 //display message
-                richTextBox1.Text = "you halqjflqijfem";
+                richTextBox1.Text = "Vous avez manqué un champ!";
             }
             //il faut chercher "classe"
             else
             {
                 if (radioButtonEtudiant.Checked)
                 {
-                    Etudiant new = new Etudiant(textBoxNom.Text, textBoxPrenom.Text, textBoxAge.Text, textBoxClasse.Text);
+                    liste.ajouter(new Etudiant(textBoxNom.Text, textBoxPrenom.Text, Int32.Parse(textBoxAge.Text), textBoxClasse.Text));
+                    richTextBox1.Text = "Saisie etudiant enregistrée.";
                 }
                 else
                 {
-
+                    liste.ajouter(new Professeur(textBoxNom.Text, textBoxPrenom.Text, Int32.Parse(textBoxAge.Text), textBoxClasse.Text));
+                    richTextBox1.Text = "Saisie professeur enregistrée.";
                 }
+
+                textBoxAge.Clear();
+                textBoxClasse.Clear();
+                textBoxNom.Clear();
+                textBoxPrenom.Clear();
+
             }
         }
 
@@ -118,6 +133,53 @@ namespace WindowsFormsApp1
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
             
+        }
+
+        private void buttonEtudiant_Click(object sender, EventArgs e)
+        {
+            int ordre = 2;
+            if (radioButtonAlpha.Checked)
+            {
+                ordre = 0;
+            }
+            else if (radioButtonAncien.Checked)
+            {
+                ordre = 1;
+            }
+            liste.afficherEtudiants(richTextBox1, ordre);
+        }
+
+        private void buttonTous_Click(object sender, EventArgs e)
+        {
+            int ordre = 2;
+            if (radioButtonAlpha.Checked)
+            {
+                ordre = 0;
+            }
+            else if (radioButtonAncien.Checked)
+            {
+                ordre = 1;
+            }
+            liste.afficher(richTextBox1, ordre);
+        }
+
+        private void radioButtonAlpha_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonProf_Click(object sender, EventArgs e)
+        {
+            int ordre = 2;
+            if (radioButtonAlpha.Checked)
+            {
+                ordre = 0;
+            }
+            else if (radioButtonAncien.Checked)
+            {
+                ordre = 1;
+            }
+            liste.afficherProfesseurs(richTextBox1, ordre);
         }
     }
 

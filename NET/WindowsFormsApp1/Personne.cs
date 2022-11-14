@@ -34,9 +34,9 @@ namespace WindowsFormsApp1
             return this.prenom;
         }
 
-        public String toString()
+        public override String ToString()
         {
-            return "nom = " + this.nom + ", prénom = " + this.prenom + ", age = " + this.age;
+            return this.nom + " " + this.prenom + ", " + this.age + " ans";
         }
     }
 }
