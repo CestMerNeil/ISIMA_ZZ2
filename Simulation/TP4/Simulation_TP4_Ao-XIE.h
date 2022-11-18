@@ -5,9 +5,11 @@
 #include <string.h>
 
 #define NB_MAX 50000000
-#define DURATION 80
+#define DURATION 240
 #define NUMRABBITSTART 1000000
 #define SizeRabbit 100
+
+#define PI 3.141592653589793
 
 #define N 624
 #define M 397
@@ -23,12 +25,15 @@ double genrand_real1(void);
 double genrand_real2(void);
 double genrand_real3(void);
 double genrand_res53(void);
-double BoxMuller(double mean, double stdc);
+double BoxMuller(void);
 
 int judgeGender(void);
 int timeSexualMat(void);
+int getNbBaby(void);
 int calculChanceSurvival(int ageRabbit, int sexualMat);
-void resetArray(struct MR *MR, int countRabbit);
+void resetArray_MR(struct MR *MR, int countRabbit);
+void resetArray_FR(struct FR *FR, int countRabbit);
+
 
 
 struct MR // Male Rabbit
@@ -47,6 +52,7 @@ struct FR // Female Rabbit
     int age; // month
     int sexualMat; // time of sexMat
     int survivalState;
+    int nbBabyYear; 
 }FR[NB_MAX]={0};
 
 struct MR_MEM // Male Rabbit

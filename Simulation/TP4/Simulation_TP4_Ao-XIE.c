@@ -78,7 +78,7 @@ int calculChanceSurvival(int ageRabbit, int sexualMat)
     {   
         if(ageRabbit < 120) // For rabbits who are adults but not 10 years old
         {
-            if(chanceSurvival < 0.8) surviveState = 1;
+            if(chanceSurvival < 0.6) surviveState = 1;
         }
         else
         {
@@ -136,11 +136,11 @@ void resetArray_MR(struct MR *MR, int countRabbit)
 }
 
  /** ------------------------------------------------------------------- *
-   * @fn         resetArray_FR                                              *
+   * @fn         resetArray_FR                                           *
    *                                                                     *
    * @brief      Empty dead rabbits in struct array.                     *  
    *                                                                     *
-   * @param      FR {struct MR} The struct array.                        *
+   * @param      FR {struct FR} The struct array.                        *
    * @param      countRabbit {int} Number of rabbits who are alives      *
    * ------------------------------------------------------------------- */
 void resetArray_FR(struct FR *FR, int countRabbit)
@@ -315,35 +315,29 @@ double genrand_res53(void)
    * @return    A random number                                                                                                          *
    * @todo      It's for the question FIVE PART TWO                                                                                      *
    * ----------------------------------------------------------------------------------------------------------------------------------- */
-double BoxMuller(double mean, double stdc)
+double BoxMuller(void)
 {
-    double v1 = 0;
-    double v2 = 0;
-    double s = 0;
-    int phase = 0;
-    double x;
+    static double u;
+    static double v;
+    static int phase = 0;
+    double z;
     if(phase == 0)
     {
-        do
-        {
-            double u1 = genrand_real2() / RAND_MAX;
-            double u2 = genrand_real2() / RAND_MAX;
-
-            v1 = 2 * u1 - 1;
-            v2 = 2 * u2 - 1;
-            s = v1 * v1 + v2 * v2;
-        }while(s >= 1 || s ==0);
-
-        x = v1 * sqrt(-2 * log(s) / s);
+        u = genrand_real2() / (RAND_MAX + 1.0);
+        v = genrand_real2() / (RAND_MAX + 1.0);
+        z = sqrt(-2.0 * log(u)) * cos(2.0 * PI * v);
     }
     else
     {
-        x = v2 * sqrt(-2 * log(s) / s);
+        z = sqrt(-2.0 * log(u)) * cos(2.0 * PI * v);
     }
-
     phase = 1 - phase;
+    return z;
+}
 
-    return mean + x * stdc;
+int getNbBaby(void)
+{
+    return 3 + (genrand_real2() * 3);
 }
 
  /** ------------------------------------------------------------------- *
@@ -390,6 +384,7 @@ void RealRabbit()
     }
 
     // Synchronisation number the rabbits
+    printf("In this month, %d male rabbits has dead, %d female\n", countMR - countMR_MEM, countFR - countFR_MEM);
     countMR = countMR_MEM;
     countFR = countFR_MEM;
 
@@ -452,11 +447,12 @@ void RealRabbit()
         // All in all, calculate the number of rabbits suitable for childbirth
         for(int i=0; i<countFR; i++)
         {
-            if(FR[i].sexualMat <= FR[i].age && countMR != 0)
+            if((FR[i].sexualMat <= FR[i].age) && countMR != 0)
             {
-                countFR_CHILDBITRH+=10;
+                countFR_CHILDBITRH+=3;
             }
         }
+        printf("this month, you have %d baby rabbits\n", countFR_CHILDBITRH);
 
         // In this programme, fertility rate is not taken into account
         // Suppose each female of school age gives birth to one rabbit
@@ -502,7 +498,7 @@ void RealRabbit()
                 countFR_MEM--;
             }
         }
-        
+        printf("In this month, %d male rabbits has dead, %d female\n", countMR - countMR_MEM, countFR - countFR_MEM);
         // Synchronisation number the rabbits
         countMR = countMR_MEM;
         countFR = countFR_MEM;
