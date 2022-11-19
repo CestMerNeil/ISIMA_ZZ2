@@ -93,7 +93,7 @@ void bellman(t_sol& s, t_graphe g, int debut, int fin, int ordre[]) {
 
 
 void lire_fichier(t_graphe& g) {
-	ifstream infile("C:\\Users\\chberthold\\Documents\\TP1_DATA\\DLP_210.dat");
+	ifstream infile("D:\\CodeGithub\\ISIMA_ZZ2\\Outils_Aide_de_la_Decision\\TP1\\TP1_DATA\\DLP_210.dat");
 
 	string temp;
 	int i;
