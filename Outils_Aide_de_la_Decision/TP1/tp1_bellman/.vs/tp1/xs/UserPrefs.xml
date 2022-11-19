@@ -1,0 +1,29 @@
+﻿<Properties>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x64" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="tp1/Source.cpp">
+    <Files>
+      <File FileName="tp1/tp1.cpp" Line="1" Column="1" />
+      <File FileName="tp1/Source.cpp" Line="41" Column="12" />
+      <File FileName="tp1/Header.h" Line="25" Column="8" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="tp1" expanded="True">
+            <Node name="tp1" expanded="True">
+              <Node name="Source.cpp" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

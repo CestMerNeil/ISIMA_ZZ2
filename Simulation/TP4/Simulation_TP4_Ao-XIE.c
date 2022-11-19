@@ -26,10 +26,10 @@ void RabbitSwarmAlgo()
 
 
  /** ------------------------------------------------------------------- *
-   * @fn         RabbitSwarmAlgo                                         *
+   * @fn         judgeGender                                         *
    *                                                                     *
    * @brief            *
-   * @return 1-> male; 0 -> female                             *
+   * @return 1-> male; 2 -> female                             *
    * @todo
    * ------------------------------------------------------------------- */
 int judgeGender(void)
@@ -44,12 +44,21 @@ int judgeGender(void)
         }
     else
     {
-        sex = 0;
+        sex = 2;
     }
 
     return sex;
 }
 
+
+ /** ------------------------------------------------------------------- *
+   * @fn         timeSexualMat                                         *
+   *                                                                     *
+   * @brief      Random integers between 5 and 8 were generated to 
+   *             simulate the sexual maturation time of the rabbits.      *
+   * @return 1-> male; 2 -> female                             *
+   * @todo
+   * ------------------------------------------------------------------- */
 int timeSexualMat(void)
 {
     return 3 * genrand_real2() + 5;
@@ -91,25 +100,26 @@ int calculChanceSurvival(int ageRabbit, int sexualMat)
 }
 
  /** ------------------------------------------------------------------- *
-   * @fn         resetArray_MR                                              *
+   * @fn         resetArray_Rabbit                                              *
    *                                                                     *
    * @brief      Empty dead rabbits in struct array.                     *  
    *                                                                     *
-   * @param      MR {struct MR} The struct array.                        *
+   * @param      Rabbit {struct Rabbit} The struct array.                        *
    * @param      countRabbit {int} Number of rabbits who are alives      *
    * ------------------------------------------------------------------- */
-void resetArray_MR(struct MR *MR, int countRabbit)
+void resetArray_Rabbit(struct Rabbit *Rabbit, int countRabbit)
 {
     int i = 0;
     int j = 0;
     int k = 0;
-    do    // Copy those rabbits alive to another structure -> MR_MEM
+    do    // Copy those rabbits alive to another structure -> Rabbit_MEM
     {
-        if(MR[j].survivalState == 1)
+        if(Rabbit[j].survivalState == 1)
         {
-            MR_MEM[i].age = MR[j].age;
-            MR_MEM[i].survivalState = MR[j].survivalState;
-            MR_MEM[i].sexualMat = MR[j].sexualMat;
+            Rabbit_MEM[i].age = Rabbit[j].age;
+            Rabbit_MEM[i].sex = Rabbit[i].sex;
+            Rabbit_MEM[i].survivalState = Rabbit[j].survivalState;
+            Rabbit_MEM[i].sexualMat = Rabbit[j].sexualMat;
             i++;
         }
         j++;
@@ -117,66 +127,23 @@ void resetArray_MR(struct MR *MR, int countRabbit)
 
     for(; k<countRabbit; k++)    // Back the data to the array original
     {
-        MR[k].age = MR_MEM[k].age;
-        MR[k].survivalState = MR_MEM[k].survivalState;
-        MR[k].sexualMat = MR_MEM[k].sexualMat;
+        Rabbit[k].age = Rabbit_MEM[k].age;
+        Rabbit[k].sex = Rabbit_MEM[k].sex;
+        Rabbit[k].survivalState = Rabbit_MEM[k].survivalState;
+        Rabbit[k].sexualMat = Rabbit_MEM[k].sexualMat;
     }
     for(;k<NB_MAX;k++)    // Zero out subsequent structures
     {
-        MR[k].age = 0;
-        MR[k].survivalState = 0;
-        MR[k].sexualMat = 0;
+        Rabbit[k].age = 0;
+        Rabbit[k].sex = 0;
+        Rabbit[k].survivalState = 0;
+        Rabbit[k].sexualMat = 0;
     }
     for(int l =0; l<NB_MAX; l++) // reset the array ME_MEM
     {
-        MR_MEM[l].age = 0;
-        MR_MEM[l].survivalState = 0;
-        MR_MEM[l].sexualMat = 0;
-    }
-}
-
- /** ------------------------------------------------------------------- *
-   * @fn         resetArray_FR                                           *
-   *                                                                     *
-   * @brief      Empty dead rabbits in struct array.                     *  
-   *                                                                     *
-   * @param      FR {struct FR} The struct array.                        *
-   * @param      countRabbit {int} Number of rabbits who are alives      *
-   * ------------------------------------------------------------------- */
-void resetArray_FR(struct FR *FR, int countRabbit)
-{
-    int i = 0;
-    int j = 0;
-    int k = 0;
-    do    // Copy those rabbits alive to another structure -> MR_MEM
-    {
-        if(FR[j].survivalState == 1)
-        {
-            MR_MEM[i].age = MR[j].age;
-            MR_MEM[i].survivalState = MR[j].survivalState;
-            MR_MEM[i].sexualMat = MR[j].sexualMat;
-            i++;
-        }
-        j++;
-    }while(i < countRabbit);
-
-    for(; k<countRabbit; k++)    // Back the data to the array original
-    {
-        FR[k].age = MR_MEM[k].age;
-        FR[k].survivalState = MR_MEM[k].survivalState;
-        FR[k].sexualMat = MR_MEM[k].sexualMat;
-    }
-    for(;k<NB_MAX;k++)    // Zero out subsequent structures
-    {
-        FR[k].age = 0;
-        FR[k].survivalState = 0;
-        FR[k].sexualMat = 0;
-    }
-    for(int l =0; l<NB_MAX; l++) // reset the array ME_MEM
-    {
-        MR_MEM[l].age = 0;
-        MR_MEM[l].survivalState = 0;
-        MR_MEM[l].sexualMat = 0;
+        Rabbit_MEM[l].age = 0;
+        Rabbit_MEM[l].survivalState = 0;
+        Rabbit_MEM[l].sexualMat = 0;
     }
 }
 
@@ -348,166 +315,164 @@ int getNbBaby(void)
    * ------------------------------------------------------------------- */
 void RealRabbit()
 {
-    int countMR = NUMRABBITSTART; // number of male rabbits
-    int countMR_MEM = NUMRABBITSTART;
-    int countFR = NUMRABBITSTART; // number of female rabbits
-    int countFR_MEM = NUMRABBITSTART;
-    int countFR_CHILDBITRH = 0; // number of female rabbits suitable for childbirth
+    int countRabbit = NURabbitABBITSTART; // number of male rabbits
+    int countRabbit_MEM = NURabbitABBITSTART;
+    int countRabbit = NURabbitABBITSTART; // number of female rabbits
+    int countRabbit_MEM = NURabbitABBITSTART;
+    int countRabbit_CHILDBITRH = 0; // number of female rabbits suitable for childbirth
 
     // In the first month, there was NUMBERSTART male rabbits and NUMBERSTART female rabbits by default
-    for(int i=0; i<NUMRABBITSTART; i++)
+    for(int i=0; i<NURabbitABBITSTART; i++)
     {
-        MR[i].age = 1;
-        FR[i].age = 1;
+        Rabbit[i].age = 1;
+        Rabbit[i].age = 1;
 
-        MR[i].sexualMat = timeSexualMat();
-        FR[i].sexualMat = timeSexualMat();
+        Rabbit[i].sexualMat = timeSexualMat();
+        Rabbit[i].sexualMat = timeSexualMat();
 
-        MR[i].survivalState = calculChanceSurvival(MR[i].age, MR[i].sexualMat);
-        FR[i].survivalState = calculChanceSurvival(FR[i].age, FR[i].sexualMat);
+        Rabbit[i].survivalState = calculChanceSurvival(Rabbit[i].age, Rabbit[i].sexualMat);
+        Rabbit[i].survivalState = calculChanceSurvival(Rabbit[i].age, Rabbit[i].sexualMat);
     }
 
     // Delete the rabbit that died in the first month
-    for(int i=0; i<countMR; i++)
+    for(int i=0; i<countRabbit; i++)
     {
-        if(MR[i].survivalState == 0)
+        if(Rabbit[i].survivalState == 0)
         {
-            countMR_MEM--;
+            countRabbit_MEM--;
         }
     }
-    for(int i=0; i<countFR; i++)
+    for(int i=0; i<countRabbit; i++)
     {
-        if(FR[i].survivalState == 0)
+        if(Rabbit[i].survivalState == 0)
         {
-            countFR_MEM--;
+            countRabbit_MEM--;
         }
     }
 
     // Synchronisation number the rabbits
-    printf("In this month, %d male rabbits has dead, %d female\n", countMR - countMR_MEM, countFR - countFR_MEM);
-    countMR = countMR_MEM;
-    countFR = countFR_MEM;
+    printf("In this month, %d male rabbits has dead, %d female\n", countRabbit - countRabbit_MEM, countRabbit - countRabbit_MEM);
+    countRabbit = countRabbit_MEM;
+    countRabbit = countRabbit_MEM;
 
     // reset the array
-    resetArray_MR(MR, countMR);
-    resetArray_FR(FR, countFR);
+    resetArray_Rabbit(Rabbit, countRabbit);
+    resetArray_Rabbit(Rabbit, countRabbit);
 
-    printf("In the 1\teme month, we have %d\tmale rabbits and %d\tfemale rabbits\n", countMR_MEM, countFR_MEM);
+    printf("In the 1\teme month, we have %d\tmale rabbits and %d\tfemale rabbits\n", countRabbit_MEM, countRabbit_MEM);
 
     for(int month = 2; month <= DURATION; month++)
     {
         // Update the age
-        for(int i=0; i<countMR; i++)
+        for(int i=0; i<countRabbit; i++)
         {
-            MR[i].age++;
+            Rabbit[i].age++;
         }
-        for(int i=0; i<countFR; i++)
+        for(int i=0; i<countRabbit; i++)
         {
-            FR[i].age++;
+            Rabbit[i].age++;
         }
 
         // Update the chance of death
-        for(int i=0; i<countMR; i++)
+        for(int i=0; i<countRabbit; i++)
         {
-            MR[i].survivalState = calculChanceSurvival(MR[i].age, MR[i].sexualMat);
+            Rabbit[i].survivalState = calculChanceSurvival(Rabbit[i].age, Rabbit[i].sexualMat);
         }
-        for(int i=0; i<countFR; i++)
+        for(int i=0; i<countRabbit; i++)
         {
-            FR[i].survivalState = calculChanceSurvival(FR[i].age, FR[i].sexualMat);
+            Rabbit[i].survivalState = calculChanceSurvival(Rabbit[i].age, Rabbit[i].sexualMat);
         }
 
         // Delete the rabbit died
-        for(int i=0; i<countMR; i++)
+        for(int i=0; i<countRabbit; i++)
         {
-            if(MR[i].survivalState == 0)
+            if(Rabbit[i].survivalState == 0)
             {
-                countMR_MEM--;
+                countRabbit_MEM--;
             }
         }
-        for(int i=0; i<countFR; i++)
+        for(int i=0; i<countRabbit; i++)
         {
-            if(FR[i].survivalState == 0)
+            if(Rabbit[i].survivalState == 0)
             {
-                countFR_MEM--;
+                countRabbit_MEM--;
             }
         }
 
         // Synchronisation number the rabbits
-        countMR = countMR_MEM;
-        countFR = countFR_MEM;
+        countRabbit = countRabbit_MEM;
+        countRabbit = countRabbit_MEM;
 
         // reset the array
-        resetArray_MR(MR, countMR);
-        resetArray_FR(FR, countFR);
+        resetArray_Rabbit(Rabbit, countRabbit);
+        resetArray_Rabbit(Rabbit, countRabbit);
 
         /* Calculate fertility*/
         // For rabbits, the number of males and females isn't taken into account
-        // So, it have to use countFR and countFR_MEM for calcul
+        // So, it have to use countRabbit and countRabbit_MEM for calcul
 
         // All in all, calculate the number of rabbits suitable for childbirth
-        for(int i=0; i<countFR; i++)
+        for(int i=0; i<countRabbit; i++)
         {
-            if((FR[i].sexualMat <= FR[i].age) && countMR != 0)
+            if((Rabbit[i].sexualMat <= Rabbit[i].age) && countRabbit != 0)
             {
-                countFR_CHILDBITRH+=3;
+                countRabbit_CHILDBITRH+=3;
             }
         }
-        printf("this month, you have %d baby rabbits\n", countFR_CHILDBITRH);
+        //printf("this month, you have %d baby rabbits\n", countRabbit_CHILDBITRH);
 
         // In this programme, fertility rate is not taken into account
         // Suppose each female of school age gives birth to one rabbit
-        for(int i=0; i<countFR_CHILDBITRH; i++)
+        for(int i=0; i<countRabbit_CHILDBITRH; i++)
         {
             int sex = judgeGender();
             if(sex == 1)
             {
-                MR[countMR_MEM].age = 1;
-                MR[countMR_MEM].sexualMat = timeSexualMat();
-                MR[countMR_MEM].survivalState = calculChanceSurvival(FR[countMR_MEM].age, FR[countMR_MEM].sexualMat);
-                countMR_MEM++;
+                Rabbit[countRabbit_MEM].age = 1;
+                Rabbit[countRabbit_MEM].sexualMat = timeSexualMat();
+                Rabbit[countRabbit_MEM].survivalState = calculChanceSurvival(Rabbit[countRabbit_MEM].age, Rabbit[countRabbit_MEM].sexualMat);
+                countRabbit_MEM++;
             }
             if(sex == 0)
             {
-                FR[countFR_MEM].age = 1;
-                FR[countFR_MEM].sexualMat = timeSexualMat();
-                FR[countFR_MEM].survivalState = calculChanceSurvival(FR[countFR_MEM].age, FR[countFR_MEM].sexualMat);
-                countFR_MEM++;
+                Rabbit[countRabbit_MEM].age = 1;
+                Rabbit[countRabbit_MEM].sexualMat = timeSexualMat();
+                Rabbit[countRabbit_MEM].survivalState = calculChanceSurvival(Rabbit[countRabbit_MEM].age, Rabbit[countRabbit_MEM].sexualMat);
+                countRabbit_MEM++;
             }
         }
 
         // reset number of baby in the next month
-        countFR_CHILDBITRH = 0;
+        countRabbit_CHILDBITRH = 0;
 
         // Synchronisation number the rabbits
-        countMR = countMR_MEM;
-        countFR = countFR_MEM;
-        
+        countRabbit = countRabbit_MEM;
+
         
         // Delete the rabbit that died in this month
-        for(int i=0; i<countMR; i++)
+        for(int i=0; i<countRabbit; i++)
         {
-            if(MR[i].survivalState == 0)
+            if(Rabbit[i].survivalState == 0)
             {
-                countMR_MEM--;
+                countRabbit_MEM--;
             }
         }
-        for(int i=0; i<countFR; i++)
+        for(int i=0; i<countRabbit; i++)
         {
-            if(FR[i].survivalState == 0)
+            if(Rabbit[i].survivalState == 0)
             {
-                countFR_MEM--;
+                countRabbit_MEM--;
             }
         }
-        printf("In this month, %d male rabbits has dead, %d female\n", countMR - countMR_MEM, countFR - countFR_MEM);
+        //printf("In this month, %d male rabbits has dead, %d female\n", countRabbit - countRabbit_MEM, countRabbit - countRabbit_MEM);
         // Synchronisation number the rabbits
-        countMR = countMR_MEM;
-        countFR = countFR_MEM;
+        countRabbit = countRabbit_MEM;
+
 
         // reset the array
-        resetArray_MR(MR, countMR);
-        resetArray_FR(FR, countFR);
+        resetArray_Rabbit(Rabbit, countRabbit);
 
-        printf("In the %d\teme month, we have %d\tmale rabbits and %d\tfemale rabbits\n", month, countMR_MEM, countFR_MEM);
+        //printf("In the %d\teme month, we have %d\tmale rabbits and %d\tfemale rabbits\n", month, countRabbit_MEM, countRabbit_MEM);
     }
 
 }

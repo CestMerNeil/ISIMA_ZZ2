@@ -6,7 +6,7 @@
 
 #define NB_MAX 50000000
 #define DURATION 240
-#define NUMRABBITSTART 1000000
+#define NURabbitABBITSTART 1000000
 #define SizeRabbit 100
 
 #define PI 3.141592653589793
@@ -31,35 +31,24 @@ int judgeGender(void);
 int timeSexualMat(void);
 int getNbBaby(void);
 int calculChanceSurvival(int ageRabbit, int sexualMat);
-void resetArray_MR(struct MR *MR, int countRabbit);
-void resetArray_FR(struct FR *FR, int countRabbit);
+void resetArray_Rabbit(struct Rabbit *Rabbit, int countRabbit);
 
 
 
-struct MR // Male Rabbit
+struct Rabbit
 {
     // Each time, we create a rabbit
     // Then, we have to init all the random number for this rabbit.
     int age; // month
+    int sex; // 1->male 2-> female
     int sexualMat; // time of sexMat
     int survivalState; // Chance of death
-}MR[NB_MAX]={0};
+}Rabbit[NB_MAX]={0};
 
-struct FR // Female Rabbit
+struct Rabbit_MEM // A copy of Rabbit to delete died rabbits
 {
-    // Each time, we create a rabbit
-    // Then, we have to init all the random number for this rabbit.
     int age; // month
-    int sexualMat; // time of sexMat
-    int survivalState;
-    int nbBabyYear; 
-}FR[NB_MAX]={0};
-
-struct MR_MEM // Male Rabbit
-{
-    // Each time, we create a rabbit
-    // Then, we have to init all the random number for this rabbit.
-    int age; // month
+    int sex;
     int sexualMat; // time of sexMat
     int survivalState; // Chance of death
-}MR_MEM[NB_MAX]={0};
+}Rabbit_MEM[NB_MAX]={0};
