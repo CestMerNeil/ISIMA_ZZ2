@@ -1,12 +1,27 @@
+ /** ------------------------------------------------------------------- *
+   * @todo       Rabbit colony simulation algorithm                      *
+   * @authors    Ao XIE; Cholé BERTHOLD                                  *
+   * @version    2.5.2                                                   *
+   *                                                                     *
+   * Updates:                                                            *
+   *     1. Updated the structure model to use only one structure.       *
+   *     2. Updated iterative algorithm to include a Gaussian            *
+   *        distributed reproduction function.                           *
+   *     3. Update the survival rate algorithm:                          *
+   *         (1) The monthly survival rate of young rabbits is updated   *
+   *             to 0.92, i.e. an annual survival rate of 0.35.          *
+   *         (2) The monthly survival rate for adult rabbits is updated  *
+   *             to 0.95, i.e. an annual survival rate of 0.6.           *
+   * ------------------------------------------------------------------- */
+
 #include "Simulation_TP4_Ao-XIE.h"
 
  /** ------------------------------------------------------------------- *
    * @fn         RabbitSwarmAlgo                                         *
    *                                                                     *
    * @brief      Calcul value of Pi with the Monte Carlo Simulation      *
-   * @todo       It's for the question ONE                               *
    * ------------------------------------------------------------------- */
-void RabbitSwarmAlgo()
+void RabbitSwarmAlgo(void)
 {
     int RabbitTable[SizeRabbit][2] = {0};
     RabbitTable[0][0] = 1;
@@ -20,17 +35,19 @@ void RabbitSwarmAlgo()
 
     for(int i = 0; i < SizeRabbit; i++)
     {
-        printf("In the %d\teme month, we have %d\t little pair, %d\t adult pair \n", i+1, RabbitTable[i][0], RabbitTable[i][1]);
+        printf("Month:%d\t", i+1);
+        printf("Numbers of little pairs: %d\t", RabbitTable[i][0]);
+        printf("NUmbers of adults pairs: %d\n", RabbitTable[i][1]);
     }
 }
 
 
  /** ------------------------------------------------------------------- *
-   * @fn         judgeGender                                         *
+   * @fn         judgeGender                                             *
    *                                                                     *
-   * @brief            *
-   * @return 1-> male; 2 -> female                             *
-   * @todo
+   * @brief      Generate gender with equal probability                  *
+   *                                                                     *
+   * @return     Sex [1-> male; 2 -> female]                             *
    * ------------------------------------------------------------------- */
 int judgeGender(void)
 {
@@ -38,26 +55,19 @@ int judgeGender(void)
     double random;
 
     random = genrand_real2();
-    if(random < 0.5)
-    {
-        sex = 1;
-        }
-    else
-    {
-        sex = 2;
-    }
+    if(random < 0.5) sex = 1;
+    else sex = 2;
 
     return sex;
 }
 
-
  /** ------------------------------------------------------------------- *
-   * @fn         timeSexualMat                                         *
+   * @fn         timeSexualMat                                           *
    *                                                                     *
-   * @brief      Random integers between 5 and 8 were generated to 
-   *             simulate the sexual maturation time of the rabbits.      *
-   * @return 1-> male; 2 -> female                             *
-   * @todo
+   * @brief      Random integers between 5 and 8 were generated to       *
+   *             simulate the sexual maturation time of the rabbits.     *
+   *                                                                     *
+   * @return     Time of sexual maturity                                 *
    * ------------------------------------------------------------------- */
 int timeSexualMat(void)
 {
@@ -65,11 +75,14 @@ int timeSexualMat(void)
 }
 
  /** ------------------------------------------------------------------- *
-   * @fn         calculChanceSurvival                                         *
+   * @fn         calculChanceSurvival                                    *
    *                                                                     *
-   * @brief            *
-   * @return 1-> survive; 0 -> die                             *
-   * @todo
+   * @brief      Survival rate based on age and time to sexual maturity  *
+   *                                                                     *
+   * @param      ageRabbit {int} The age of the rabbit                   *
+   * @param      sexualMat {int} Sexual maturity of rabbits              *
+   *                                                                     *
+   * @return     Survival rate of rabbits [1-> survive; 0 -> die]        *
    * ------------------------------------------------------------------- */
 int calculChanceSurvival(int ageRabbit, int sexualMat)
 {
@@ -81,18 +94,18 @@ int calculChanceSurvival(int ageRabbit, int sexualMat)
     chanceSurvival = genrand_real2();
     if(sexualMat > ageRabbit) // For underage rabbits
     {
-        if(chanceSurvival<0.6) surviveState = 1;
+        if(chanceSurvival<=0.92) surviveState = 1;
     }
     else
     {   
         if(ageRabbit < 120) // For rabbits who are adults but not 10 years old
         {
-            if(chanceSurvival < 0.6) surviveState = 1;
+            if(chanceSurvival <= 0.95) surviveState = 1;
         }
         else
         {
             Outdo = ageRabbit - 120;
-            if(chanceSurvival < 0.5 - ((0.1 / 12) * Outdo)) surviveState = 1;
+            if(chanceSurvival <= (0.6 - (Outdo * 0.01))) surviveState = 1;
         }
     }
 
@@ -100,51 +113,257 @@ int calculChanceSurvival(int ageRabbit, int sexualMat)
 }
 
  /** ------------------------------------------------------------------- *
-   * @fn         resetArray_Rabbit                                              *
+   * @fn         resetArray_Rabbit                                       *
    *                                                                     *
-   * @brief      Empty dead rabbits in struct array.                     *  
+   * @brief      Empty dead rabbits in struct array.                     *
    *                                                                     *
-   * @param      Rabbit {struct Rabbit} The struct array.                        *
+   * @param      Rabbit {struct Rabbit} The struct array.                *
+   * @param      Rabbit_MEM {struct Rabbit} Secondary Structures         *
    * @param      countRabbit {int} Number of rabbits who are alives      *
    * ------------------------------------------------------------------- */
-void resetArray_Rabbit(struct Rabbit *Rabbit, int countRabbit)
+void resetArray_Rabbit(struct Rabbit *Rabbit, struct Rabbit *Rabbit_MEM, int countRabbit)
 {
     int i = 0;
     int j = 0;
     int k = 0;
-    do    // Copy those rabbits alive to another structure -> Rabbit_MEM
+    while(i < countRabbit)    // Copy those rabbits alive to another structure -> Rabbit_MEM
     {
-        if(Rabbit[j].survivalState == 1)
+        if((Rabbit+j)->survivalState == 1)
         {
-            Rabbit_MEM[i].age = Rabbit[j].age;
-            Rabbit_MEM[i].sex = Rabbit[i].sex;
-            Rabbit_MEM[i].survivalState = Rabbit[j].survivalState;
-            Rabbit_MEM[i].sexualMat = Rabbit[j].sexualMat;
+            (Rabbit_MEM+i)->age = (Rabbit+j)->age;
+            (Rabbit_MEM+i)->sex = (Rabbit+j)->sex;
+            (Rabbit_MEM+i)->survivalState = (Rabbit+j)->survivalState;
+            (Rabbit_MEM+i)->sexualMat = (Rabbit+j)->sexualMat;
+            (Rabbit_MEM+i)->timesChildYear = (Rabbit+j)->timesChildYear;
             i++;
         }
         j++;
-    }while(i < countRabbit);
+    }
 
     for(; k<countRabbit; k++)    // Back the data to the array original
     {
-        Rabbit[k].age = Rabbit_MEM[k].age;
-        Rabbit[k].sex = Rabbit_MEM[k].sex;
-        Rabbit[k].survivalState = Rabbit_MEM[k].survivalState;
-        Rabbit[k].sexualMat = Rabbit_MEM[k].sexualMat;
+        (Rabbit+k)->age = (Rabbit_MEM+k)->age;
+        (Rabbit+k)->sex = (Rabbit_MEM+k)->sex;
+        (Rabbit+k)->survivalState = (Rabbit_MEM+k)->survivalState;
+        (Rabbit+k)->sexualMat = (Rabbit_MEM+k)->sexualMat;
+        (Rabbit+k)->timesChildYear = (Rabbit_MEM+k)->timesChildYear;
     }
     for(;k<NB_MAX;k++)    // Zero out subsequent structures
     {
-        Rabbit[k].age = 0;
-        Rabbit[k].sex = 0;
-        Rabbit[k].survivalState = 0;
-        Rabbit[k].sexualMat = 0;
+        (Rabbit+k)->age = 0;
+        (Rabbit+k)->sex = 0;
+        (Rabbit+k)->survivalState = 0;
+        (Rabbit+k)->sexualMat = 0;
+        (Rabbit+k)->timesChildYear =0;
     }
-    for(int l =0; l<NB_MAX; l++) // reset the array ME_MEM
+}
+
+
+
+ /** ------------------------------------------------------------------- *
+   * @fn        BoxMuller                                                *
+   *                                                                     *
+   * @brief     Used to generate a standard Gaussian distribution of     *
+   *            random numbers.                                          *
+   *                                                                     *
+   * @return    A random value in a standard Gaussian distribution       *
+   * ------------------------------------------------------------------- */
+double BoxMuller(void)
+{
+    static double u;
+    static double v;
+    static int phase = 0;
+    double z;
+    if(phase == 0)
     {
-        Rabbit_MEM[l].age = 0;
-        Rabbit_MEM[l].survivalState = 0;
-        Rabbit_MEM[l].sexualMat = 0;
+        u = genrand_real2();
+        v = genrand_real2();
+        z = sqrt(-2.0 * log(u)) * sin(2.0 * PI * v);
     }
+    else
+    {
+        z = sqrt(-2.0 * log(u)) * cos(2.0 * PI * v);
+    }
+    phase = 1 - phase;
+    return z;
+}
+
+ /** ------------------------------------------------------------------- *
+   * @fn        getTimeChildYear                                         *
+   *                                                                     *
+   * @brief     Randomly generate the number of times a female rabbit    *
+   *            reproduces in a year                                     *
+   *                                                                     *
+   * @return    Number of reproduction in normal distribution            *
+   * ------------------------------------------------------------------- */
+int getTimesChildYear()
+{
+    int times;
+    double num;
+
+    num = BoxMuller() + 6;
+    if(3.5 <= num && num < 4.5) times = 4;
+    else if(4.5 <= num && num < 5.5) times = 5;
+    else if(5.5 <= num && num < 6.5) times = 6;
+    else if(6.5 <= num && num < 7.5) times = 7;
+    else times = 8;
+
+    return times;
+}
+
+ /** ------------------------------------------------------------------- *
+   * @fn        getNbBaby                                                *
+   *                                                                     *
+   * @brief     Generate an integer between 3 and 6 with equal           *
+   *            probability                                              *
+   *                                                                     *
+   * @return    An integer variable between 3 and 6                      *
+   * ------------------------------------------------------------------- */
+int getNbBaby(void)
+{
+    return 3 + (genrand_real2() * 3);
+}
+
+
+ /** ------------------------------------------------------------------- *
+   * @fn         RealRabbit                                              *
+   *                                                                     *
+   * @brief      An algorithm for realistic simulation of rabbit         *
+   *             populations                                             *
+   *                                                                     *
+   * @param      Rabbit {struct Rabbit} The struct array.                *
+   * @param      Rabbit_MEM {struct Rabbit} Secondary Structures         *
+   * @param      numStart {int} Number of rabbits at the start           *
+   * @param      duration {int} Duration of the simulation               *
+   * ------------------------------------------------------------------- */
+void RealRabbit(struct Rabbit *Rabbit, struct Rabbit *Rabbit_MEM, int numStart, int duration)
+{
+    int countRabbit = numStart; // number of male rabbits
+    int countRabbit_MEM = numStart;
+    int countRabbit_CHILDBITRH = 0; // number of female rabbits suitable for childbirth
+    int oneMale = 0;
+
+    // In the first month, there was NUMBERSTART male rabbits and NUMBERSTART female rabbits by default
+    for(int i=0; i<numStart; i++)
+    {
+        (Rabbit+i)->age = 1;
+        (Rabbit+i)->sex = judgeGender();
+        (Rabbit+i)->sexualMat = timeSexualMat();
+        (Rabbit+i)->survivalState = calculChanceSurvival((Rabbit+i)->age, (Rabbit+i)->sexualMat);
+        if((Rabbit+i)->sex == 2) (Rabbit+i)->timesChildYear = getTimesChildYear();
+    }
+
+    // Delete the rabbit that died in the first month
+    for(int i=0; i<countRabbit; i++)
+    {
+        if((Rabbit+i)->survivalState == 0)
+        {
+            countRabbit_MEM--;
+        }
+    }
+
+    
+
+    // Synchronisation number the rabbits
+    countRabbit = countRabbit_MEM;
+
+    // reset the array
+    resetArray_Rabbit(Rabbit, Rabbit_MEM, countRabbit);
+
+    
+
+    for(int month = 0; month < duration; month++)
+    {
+        // Update the age
+        for(int i=0; i<countRabbit; i++)
+        {
+            (Rabbit+i)->age++;
+        }
+
+        // Calculate fertility
+        // For rabbits, the number of males and females isn't taken into account
+        // So, it have to use countRabbit and countRabbit_MEM for calcul
+        // All in all, calculate the number of rabbits suitable for childbirth
+        // As long as there are male rabbits, there must be female rabbits !!!
+        for(int i=0; i<countRabbit; i++)
+        {
+            if((Rabbit+i)->sex == 1)
+            {
+                oneMale = 1;
+                break;
+            }
+        }
+
+        for(int i=0; i<countRabbit; i++)
+        {
+            
+            if(((Rabbit+i)->sex == 2) && ((Rabbit+i)->sexualMat <= (Rabbit+i)->age) && (oneMale == 1))
+            {
+                double probability = genrand_real2();
+                if((((double)(Rabbit+i)->timesChildYear / (double)12)) >= probability)
+                {
+                    countRabbit_CHILDBITRH += getNbBaby();
+                    (Rabbit+i)->timesChildYear --;
+                    
+                
+                //printf("countRabbit_CHILDBITRH: %d\n", countRabbit_CHILDBITRH);
+            }
+        }
+
+        for(int i=0; i<countRabbit_CHILDBITRH; i++)
+        {
+            (Rabbit+countRabbit_MEM)->sex = judgeGender();
+            (Rabbit+countRabbit_MEM)->age = 1;
+            (Rabbit+countRabbit_MEM)->sexualMat = timeSexualMat();
+            (Rabbit+countRabbit_MEM)->survivalState = calculChanceSurvival(
+                (Rabbit+countRabbit_MEM)->age, (Rabbit+countRabbit_MEM)->sexualMat);
+            (Rabbit+countRabbit_MEM)->timesChildYear = getTimesChildYear();
+            countRabbit_MEM++;
+        }
+
+        // Synchronisation number the rabbits
+        countRabbit = countRabbit_MEM;
+
+        // Update the chance of death
+        for(int i=0; i<countRabbit; i++)
+        {
+            (Rabbit+i)->survivalState = calculChanceSurvival((Rabbit+i)->age, (Rabbit+i)->sexualMat);
+        }
+
+        // Delete the rabbit died
+        for(int i=0; i<countRabbit; i++)
+        {
+            if((Rabbit+i)->survivalState == 0)
+            {
+                countRabbit_MEM--;
+            }
+        }
+
+        printf("Month: %d\t", month+1);
+        printf("Number of rabbits: %d\t",countRabbit_MEM);
+        printf("Number of death: %d\t", countRabbit - countRabbit_MEM);
+        printf("Number of birth: %d\n", countRabbit_CHILDBITRH);
+
+        // Synchronisation number the rabbits
+        countRabbit = countRabbit_MEM;
+
+        // reset the array
+        resetArray_Rabbit(Rabbit, Rabbit_MEM, countRabbit);
+
+        // Annual refresh of the number of births to female rabbits
+        for(int i=0; i<countRabbit; i++)
+        {
+            if((Rabbit+i)->age % 12 == 0 && (Rabbit+i)->sex == 2)
+            {
+                (Rabbit+i)->timesChildYear = getTimesChildYear();
+            }
+        }
+
+        // reset number of baby in the next month
+        countRabbit_CHILDBITRH = 0;
+
+    }
+
 }
 
  /** ------------------------------------------------------------------- *
@@ -274,217 +493,28 @@ double genrand_res53(void)
 } 
 /* These real versions are due to Isaku Wada, 2002/01/09 added */
 
- /** ----------------------------------------------------------------------------------------------------------------------------------- *
-   * @fn        BoxMuller                                                                                                                *
-   * @brief     A high quality random number generator                                                                                   *
-   * @param     mean    Generate the middle of the range                                                                                 *
-   * @param     stdc    Generate range                                                                                                   *                                    
-   * @return    A random number                                                                                                          *
-   * @todo      It's for the question FIVE PART TWO                                                                                      *
-   * ----------------------------------------------------------------------------------------------------------------------------------- */
-double BoxMuller(void)
-{
-    static double u;
-    static double v;
-    static int phase = 0;
-    double z;
-    if(phase == 0)
-    {
-        u = genrand_real2() / (RAND_MAX + 1.0);
-        v = genrand_real2() / (RAND_MAX + 1.0);
-        z = sqrt(-2.0 * log(u)) * cos(2.0 * PI * v);
-    }
-    else
-    {
-        z = sqrt(-2.0 * log(u)) * cos(2.0 * PI * v);
-    }
-    phase = 1 - phase;
-    return z;
-}
-
-int getNbBaby(void)
-{
-    return 3 + (genrand_real2() * 3);
-}
-
- /** ------------------------------------------------------------------- *
-   * @fn         RealRabbit                                         *
-   *                                                                     *
-   * @brief            *
-   * @todo       It's for the question TWO                               *
-   * ------------------------------------------------------------------- */
-void RealRabbit()
-{
-    int countRabbit = NURabbitABBITSTART; // number of male rabbits
-    int countRabbit_MEM = NURabbitABBITSTART;
-    int countRabbit = NURabbitABBITSTART; // number of female rabbits
-    int countRabbit_MEM = NURabbitABBITSTART;
-    int countRabbit_CHILDBITRH = 0; // number of female rabbits suitable for childbirth
-
-    // In the first month, there was NUMBERSTART male rabbits and NUMBERSTART female rabbits by default
-    for(int i=0; i<NURabbitABBITSTART; i++)
-    {
-        Rabbit[i].age = 1;
-        Rabbit[i].age = 1;
-
-        Rabbit[i].sexualMat = timeSexualMat();
-        Rabbit[i].sexualMat = timeSexualMat();
-
-        Rabbit[i].survivalState = calculChanceSurvival(Rabbit[i].age, Rabbit[i].sexualMat);
-        Rabbit[i].survivalState = calculChanceSurvival(Rabbit[i].age, Rabbit[i].sexualMat);
-    }
-
-    // Delete the rabbit that died in the first month
-    for(int i=0; i<countRabbit; i++)
-    {
-        if(Rabbit[i].survivalState == 0)
-        {
-            countRabbit_MEM--;
-        }
-    }
-    for(int i=0; i<countRabbit; i++)
-    {
-        if(Rabbit[i].survivalState == 0)
-        {
-            countRabbit_MEM--;
-        }
-    }
-
-    // Synchronisation number the rabbits
-    printf("In this month, %d male rabbits has dead, %d female\n", countRabbit - countRabbit_MEM, countRabbit - countRabbit_MEM);
-    countRabbit = countRabbit_MEM;
-    countRabbit = countRabbit_MEM;
-
-    // reset the array
-    resetArray_Rabbit(Rabbit, countRabbit);
-    resetArray_Rabbit(Rabbit, countRabbit);
-
-    printf("In the 1\teme month, we have %d\tmale rabbits and %d\tfemale rabbits\n", countRabbit_MEM, countRabbit_MEM);
-
-    for(int month = 2; month <= DURATION; month++)
-    {
-        // Update the age
-        for(int i=0; i<countRabbit; i++)
-        {
-            Rabbit[i].age++;
-        }
-        for(int i=0; i<countRabbit; i++)
-        {
-            Rabbit[i].age++;
-        }
-
-        // Update the chance of death
-        for(int i=0; i<countRabbit; i++)
-        {
-            Rabbit[i].survivalState = calculChanceSurvival(Rabbit[i].age, Rabbit[i].sexualMat);
-        }
-        for(int i=0; i<countRabbit; i++)
-        {
-            Rabbit[i].survivalState = calculChanceSurvival(Rabbit[i].age, Rabbit[i].sexualMat);
-        }
-
-        // Delete the rabbit died
-        for(int i=0; i<countRabbit; i++)
-        {
-            if(Rabbit[i].survivalState == 0)
-            {
-                countRabbit_MEM--;
-            }
-        }
-        for(int i=0; i<countRabbit; i++)
-        {
-            if(Rabbit[i].survivalState == 0)
-            {
-                countRabbit_MEM--;
-            }
-        }
-
-        // Synchronisation number the rabbits
-        countRabbit = countRabbit_MEM;
-        countRabbit = countRabbit_MEM;
-
-        // reset the array
-        resetArray_Rabbit(Rabbit, countRabbit);
-        resetArray_Rabbit(Rabbit, countRabbit);
-
-        /* Calculate fertility*/
-        // For rabbits, the number of males and females isn't taken into account
-        // So, it have to use countRabbit and countRabbit_MEM for calcul
-
-        // All in all, calculate the number of rabbits suitable for childbirth
-        for(int i=0; i<countRabbit; i++)
-        {
-            if((Rabbit[i].sexualMat <= Rabbit[i].age) && countRabbit != 0)
-            {
-                countRabbit_CHILDBITRH+=3;
-            }
-        }
-        //printf("this month, you have %d baby rabbits\n", countRabbit_CHILDBITRH);
-
-        // In this programme, fertility rate is not taken into account
-        // Suppose each female of school age gives birth to one rabbit
-        for(int i=0; i<countRabbit_CHILDBITRH; i++)
-        {
-            int sex = judgeGender();
-            if(sex == 1)
-            {
-                Rabbit[countRabbit_MEM].age = 1;
-                Rabbit[countRabbit_MEM].sexualMat = timeSexualMat();
-                Rabbit[countRabbit_MEM].survivalState = calculChanceSurvival(Rabbit[countRabbit_MEM].age, Rabbit[countRabbit_MEM].sexualMat);
-                countRabbit_MEM++;
-            }
-            if(sex == 0)
-            {
-                Rabbit[countRabbit_MEM].age = 1;
-                Rabbit[countRabbit_MEM].sexualMat = timeSexualMat();
-                Rabbit[countRabbit_MEM].survivalState = calculChanceSurvival(Rabbit[countRabbit_MEM].age, Rabbit[countRabbit_MEM].sexualMat);
-                countRabbit_MEM++;
-            }
-        }
-
-        // reset number of baby in the next month
-        countRabbit_CHILDBITRH = 0;
-
-        // Synchronisation number the rabbits
-        countRabbit = countRabbit_MEM;
-
-        
-        // Delete the rabbit that died in this month
-        for(int i=0; i<countRabbit; i++)
-        {
-            if(Rabbit[i].survivalState == 0)
-            {
-                countRabbit_MEM--;
-            }
-        }
-        for(int i=0; i<countRabbit; i++)
-        {
-            if(Rabbit[i].survivalState == 0)
-            {
-                countRabbit_MEM--;
-            }
-        }
-        //printf("In this month, %d male rabbits has dead, %d female\n", countRabbit - countRabbit_MEM, countRabbit - countRabbit_MEM);
-        // Synchronisation number the rabbits
-        countRabbit = countRabbit_MEM;
-
-
-        // reset the array
-        resetArray_Rabbit(Rabbit, countRabbit);
-
-        //printf("In the %d\teme month, we have %d\tmale rabbits and %d\tfemale rabbits\n", month, countRabbit_MEM, countRabbit_MEM);
-    }
-
-}
-
 int main()
 {
     /* Inisiation for the ramdon generator */
     unsigned long init[4]={0x123, 0x234, 0x345, 0x456}, length=4;
     init_by_array(init, length);
 
-    RealRabbit();
-    //RabbitSwarmAlgo();
+    /*INIT*/
+    static struct Rabbit Rabbit[NB_MAX]={0};
+    static struct Rabbit Rabbit_MEM[NB_MAX]={0};
 
+    //RabbitSwarmAlgo();
+    RealRabbit(Rabbit, Rabbit_MEM, NUMRABBITSTART, DURATION);
+    
+    /*
+    // Test of fonctions
+    for(int i=0; i<20; i++)
+    {
+        printf("JudgeGender:%d\t", judgeGender());
+        printf("timeSexualMat:%d\t", timeSexualMat());
+        printf("getTimesChildYear:%d\t", getTimesChildYear());
+        printf("getNbBaby:%d\n", getNbBaby());
+    }
+    */
     return EXIT_SUCCESS;
 }
