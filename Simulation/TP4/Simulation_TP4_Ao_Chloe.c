@@ -1,7 +1,7 @@
  /** ------------------------------------------------------------------- *
    * @todo       Rabbit colony simulation algorithm                      *
    * @authors    Ao XIE; Cholé BERTHOLD                                  *
-   * @version    2.5.2                                                   *
+   * @version    2.5.3                                                   *
    *                                                                     *
    * Updates:                                                            *
    *     1. Updated the structure model to use only one structure.       *
@@ -305,7 +305,7 @@ void RealRabbit(struct Rabbit *Rabbit, struct Rabbit *Rabbit_MEM, int numStart, 
                     countRabbit_CHILDBITRH += getNbBaby();
                     (Rabbit+i)->timesChildYear --;
                     
-                
+                }
                 //printf("countRabbit_CHILDBITRH: %d\n", countRabbit_CHILDBITRH);
             }
         }
@@ -361,19 +361,15 @@ void RealRabbit(struct Rabbit *Rabbit, struct Rabbit *Rabbit_MEM, int numStart, 
 
         // reset number of baby in the next month
         countRabbit_CHILDBITRH = 0;
-
     }
-
 }
+
 
  /** ------------------------------------------------------------------- *
    * @todo       Prepare the generator of random numbers, It's MT in the *
    *             second lab.                                             *
    * ------------------------------------------------------------------- */
 /* Period parameters */  
-
-static unsigned long mt[N]; /* the array for the state vector  */
-static int mti=N+1; /* mti==N+1 means mt[N] is not initialized */
 
 /* initializes mt[N] with a seed */
 void init_genrand(unsigned long s)

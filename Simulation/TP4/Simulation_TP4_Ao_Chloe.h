@@ -16,8 +16,11 @@
 #define UPPER_MASK 0x80000000UL /* most significant w-r bits */
 #define LOWER_MASK 0x7fffffffUL /* least significant r bits */
 
+static unsigned long mt[N]; /* the array for the state vector  */
+static int mti=N+1; /* mti==N+1 means mt[N] is not initialized */
 
-void init_genrand(unsigned long s);
+
+//void init_genrand(unsigned long s);
 void init_by_array(unsigned long init_key[], int key_length);
 unsigned long genrand_int32(void);
 long genrand_int31(void);
