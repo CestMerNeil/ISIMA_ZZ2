@@ -49,7 +49,8 @@ namespace WindowsFormsApp1
 
             while (indexNom.Count > i && 
                 ((String.Compare(((Personne)indexNom[i]).getNom(), p.getNom()) < 0) ||
-                ((String.Compare(((Personne)indexNom[i]).getNom(), p.getNom()) == 0 && String.Compare(((Personne)indexNom[i]).getPrenom(), p.getPrenom()) < 0))))
+                ((String.Compare(((Personne)indexNom[i]).getNom(), p.getNom()) == 0 && 
+                String.Compare(((Personne)indexNom[i]).getPrenom(), p.getPrenom()) < 0))))
             {
                 i++;
             }
