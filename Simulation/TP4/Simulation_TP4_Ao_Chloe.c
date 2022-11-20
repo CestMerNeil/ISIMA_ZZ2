@@ -1,7 +1,7 @@
  /** ------------------------------------------------------------------- *
    * @todo       Rabbit colony simulation algorithm                      *
    * @authors    Ao XIE; Cholé BERTHOLD                                  *
-   * @version    2.5.3                                                   *
+   * @version    2.5.4                                                   *
    *                                                                     *
    * Updates:                                                            *
    *     1. Updated the structure model to use only one structure.       *
@@ -12,17 +12,23 @@
    *             to 0.92, i.e. an annual survival rate of 0.35.          *
    *         (2) The monthly survival rate for adult rabbits is updated  *
    *             to 0.95, i.e. an annual survival rate of 0.6.           *
+   *     4. Updating the simple rabbit swarm algorithm from a fictional  *
+   *        to a Fibonacci algorithm to simplify the complexity of the   *
+   *        algorithm.                                                   *
    * ------------------------------------------------------------------- */
 
 #include "Simulation_TP4_Ao_Chloe.h"
 
  /** ------------------------------------------------------------------- *
-   * @fn         RabbitSwarmAlgo                                         *
+   * @fn       RabbitSwarmAlgo                                           *
    *                                                                     *
-   * @brief      Calcul value of Pi with the Monte Carlo Simulation      *
+   * @brief    Calcul value of Pi with the Monte Carlo Simulation        *
+   *                                                                     *
+   * @param    n {int}    Duration of this algo.                         *
    * ------------------------------------------------------------------- */
-void RabbitSwarmAlgo(void)
+void RabbitSwarmAlgo(int n)
 {
+    /*
     int RabbitTable[SizeRabbit][2] = {0};
     RabbitTable[0][0] = 1;
     // RabbitTable[SizeRabbit][0] -> little
@@ -38,6 +44,21 @@ void RabbitSwarmAlgo(void)
         printf("Month:%d\t", i+1);
         printf("Numbers of little pairs: %d\t", RabbitTable[i][0]);
         printf("NUmbers of adults pairs: %d\n", RabbitTable[i][1]);
+    }
+    */
+    int i;
+    int s1, s2;
+    if(n==1 || n==2)
+    {
+         printf("Month: %d\tNumber of rabbits: 1\n", n);
+    }
+    s1 = 1;
+    s2 = 1;
+    for(i=3; i<=n; i++)
+    {
+        s2 = s1 + s2; //Tumbling and adding method
+        s1 = s2 - s1;
+        printf("Month: %d\tNumber of rabbits: %d\n", i, s2);
     }
 }
 
@@ -499,8 +520,8 @@ int main()
     static struct Rabbit Rabbit[NB_MAX]={0};
     static struct Rabbit Rabbit_MEM[NB_MAX]={0};
 
-    //RabbitSwarmAlgo();
-    RealRabbit(Rabbit, Rabbit_MEM, NUMRABBITSTART, DURATION);
+    RabbitSwarmAlgo(DURATION);
+    //RealRabbit(Rabbit, Rabbit_MEM, NUMRABBITSTART, DURATION);
     
     /*
     // Test of fonctions
