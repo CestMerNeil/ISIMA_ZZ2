@@ -3,11 +3,8 @@
 #include <stdlib.h> 
 #include <string.h>
 
-#define NB_MAX 10000000
-#define DURATION 240
-#define NUMRABBITSTART 10
-#define SizeRabbit 100
-
+#define DURATION 30
+#define NUMRABBITSTART 2
 #define PI 3.141592653589793
 
 #define N 624
@@ -19,7 +16,6 @@
 static unsigned long mt[N]; /* the array for the state vector  */
 static int mti=N+1; /* mti==N+1 means mt[N] is not initialized */
 
-
 //void init_genrand(unsigned long s);
 void init_by_array(unsigned long init_key[], int key_length);
 unsigned long genrand_int32(void);
@@ -29,26 +25,10 @@ double genrand_real2(void);
 double genrand_real3(void);
 double genrand_res53(void);
 double BoxMuller(void);
-/*
-void RabbitSwarmAlgo(void);
-int judgeGender(void);
-int timeSexualMat(void);
-int calculChanceSurvival(int ageRabbit, int sexualMat);
-void resetArray_Rabbit(struct Rabbit *Rabbit, struct Rabbit *Rabbit_MEM, int countRabbit);
-int getTimesChildYear(void);
-int getNbBaby(void);
-void RealRabbit(struct Rabbit *Rabbit, struct Rabbit *Rabbit_MEM, int numStart, int duration);
-*/
 
-
-
-struct Rabbit
+typedef struct Rabbit
 {
-    // Each time, we create a rabbit
-    // Then, we have to init all the random number for this rabbit.
-    int age; // month
-    int sex; // 1->male 2-> female
-    int sexualMat; // time of sexMat
-    int survivalState; // Chance of death
-    int timesChildYear;
-};
+    long long int males[16]; // Arrays in which to store the numbers of rabbits, each cell representing the age of the rabbits
+                             // [0] -> baby rabbits, [1] -> 1-year-old rabbits, ...
+    long long int females[16];
+}Rabbit;
