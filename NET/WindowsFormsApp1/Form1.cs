@@ -181,6 +181,11 @@ namespace WindowsFormsApp1
             }
             liste.afficherProfesseurs(richTextBox1, ordre);
         }
+
+        private void textBoxAge_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
     }
 
 
