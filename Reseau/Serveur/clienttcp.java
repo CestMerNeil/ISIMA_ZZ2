@@ -14,7 +14,11 @@ public class clienttcp {
             System.exit(0);
         }
         adresse = args[0];
+        port = Integer.parseInt(args[1]);
+        
+        Socket socket = new Socket(adresse, port);
 
-        port = Integer.parseInt(args[1])
+        Reader reader = new InputStreamReader(System.in);
+        BufferedReader keyboard = new BufferedReader(reader);
     }
 }
