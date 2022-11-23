@@ -25,9 +25,9 @@ namespace WindowsFormsApp1
             setMatiere(matiere);
         }
 
-        public String toString()
+        public override String ToString()
         {
-            return ((Personne)this).toString() + ", matiere = " + getMatiere();
+            return base.ToString() + ", matiere : " + getMatiere();
         }
     }
 }
