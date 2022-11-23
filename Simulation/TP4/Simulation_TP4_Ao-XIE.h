@@ -3,7 +3,6 @@
 #include <math.h>
 #include <stdlib.h> 
 #include <string.h>
-#include<windows.h>
 
 #define NB_MAX 99999999
 #define DURATION 100
