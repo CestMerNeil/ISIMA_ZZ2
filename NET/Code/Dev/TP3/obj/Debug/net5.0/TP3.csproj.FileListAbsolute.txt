@@ -1,0 +1,16 @@
+C:\Users\aoxie\Desktop\Dev\TP3\bin\Debug\net5.0\TP3.exe
+C:\Users\aoxie\Desktop\Dev\TP3\bin\Debug\net5.0\TP3.deps.json
+C:\Users\aoxie\Desktop\Dev\TP3\bin\Debug\net5.0\TP3.runtimeconfig.json
+C:\Users\aoxie\Desktop\Dev\TP3\bin\Debug\net5.0\TP3.runtimeconfig.dev.json
+C:\Users\aoxie\Desktop\Dev\TP3\bin\Debug\net5.0\TP3.dll
+C:\Users\aoxie\Desktop\Dev\TP3\bin\Debug\net5.0\ref\TP3.dll
+C:\Users\aoxie\Desktop\Dev\TP3\bin\Debug\net5.0\TP3.pdb
+C:\Users\aoxie\Desktop\Dev\TP3\obj\Debug\net5.0\TP3.csproj.AssemblyReference.cache
+C:\Users\aoxie\Desktop\Dev\TP3\obj\Debug\net5.0\TP3.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\aoxie\Desktop\Dev\TP3\obj\Debug\net5.0\TP3.AssemblyInfoInputs.cache
+C:\Users\aoxie\Desktop\Dev\TP3\obj\Debug\net5.0\TP3.AssemblyInfo.cs
+C:\Users\aoxie\Desktop\Dev\TP3\obj\Debug\net5.0\TP3.csproj.CoreCompileInputs.cache
+C:\Users\aoxie\Desktop\Dev\TP3\obj\Debug\net5.0\TP3.dll
+C:\Users\aoxie\Desktop\Dev\TP3\obj\Debug\net5.0\ref\TP3.dll
+C:\Users\aoxie\Desktop\Dev\TP3\obj\Debug\net5.0\TP3.pdb
+C:\Users\aoxie\Desktop\Dev\TP3\obj\Debug\net5.0\TP3.genruntimeconfig.cache
