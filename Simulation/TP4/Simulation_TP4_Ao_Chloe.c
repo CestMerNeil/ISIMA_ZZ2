@@ -143,7 +143,7 @@ double BoxMuller(void)
    *                                                                     *
    * @return    Number of reproduction in normal distribution            *
    * ------------------------------------------------------------------- */
-int getTimesChildYear()
+int getTimesChildYear(void)
 {
     int times;
     double num;
