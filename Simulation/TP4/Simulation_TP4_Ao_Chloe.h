@@ -1,3 +1,6 @@
+#ifndef Simulation_TP4_Ao_Chloe
+#define Simulation_TP4_Ao_Chloe
+
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h> 
@@ -32,3 +35,5 @@ typedef struct Rabbit
                              // [0] -> baby rabbits, [1] -> 1-year-old rabbits, ...
     long long int females[16];
 }Rabbit;
+
+#endif
