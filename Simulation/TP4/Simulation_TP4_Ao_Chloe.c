@@ -56,19 +56,6 @@ int judgeGender(void)
     return sex;
 }
 
- /** ------------------------------------------------------------------- *
-   * @fn         timeSexualMat                                           *
-   *                                                                     *
-   * @brief      Random integers between 5 and 8 were generated to       *
-   *             simulate the sexual maturation time of the rabbits.     *
-   *                                                                     *
-   * @return     Time of sexual maturity                                 *
-   * ------------------------------------------------------------------- */
-int timeSexualMat(void)
-{
-    return 3 * genrand_real2() + 5;
-}
-
 /** ------------------------------------------------------------------- *
    * @fn         calculChanceSurvival                                    *
    *                                                                     *
@@ -250,10 +237,20 @@ int getAdultMale(Rabbit * rabbits){
    * @param      rabbit {Rabbit} Struct for the rabbits.                 *
    * @param      duration {int} Duration of the simulation               *
    * ------------------------------------------------------------------- */
-void realRabbit(int numStartBaby, int numStartAdult, Rabbit *rabbit, int duration)
-{
+void realRabbit(int numStartBaby, int numStartAdult, Rabbit *rabbit, 
+    int duration, int numExp)
+{   
+    long long int numM[duration][numExp];
+    long long int numF[duration][numExp];
 
-    // DEFINE RABBITS -------------------------------------------------------------------
+    for(int exp=0; exp<numExp; exp++)
+    {
+        for(int i=0; i<=16; i++)
+        {
+        rabbit->females[i] = 0;
+        rabbit->males[i] = 0;
+        }
+    // DEFINE RABBITS 
     // Define those baby rabbits at start
     for(int i=0; i<numStartBaby; i++)
     {
@@ -277,7 +274,7 @@ void realRabbit(int numStartBaby, int numStartAdult, Rabbit *rabbit, int duratio
         }
     }
 
-    // Simulation for every year -------------------------------------------------------------------
+    /* Simulation for every year */ 
     for(int year=0; year<duration; year++)
     {
         // First, give birth to those little
@@ -323,9 +320,36 @@ void realRabbit(int numStartBaby, int numStartAdult, Rabbit *rabbit, int duratio
             numFemales += rabbit->females[i];
         }
 
+        numM[year][exp] += numMales;
+        numF[year][exp] += numFemales;
+        /*
         printf("Year: %2d\t", year+1);
         printf("Number of males rabbits: %lld\t", numMales);
         printf("Number of females rabbits: %lld\n", numFemales);
+        */
+    }   
+    }
+    for(int i=0; i<duration; i++)
+        {
+            long long int num = 0;
+            for(int j=0; j<numExp; j++)
+            {
+                num += numM[i][j];
+            }
+            numM[i][0] = num / numExp;
+            num = 0;
+            for(int j=0; j<numExp; j++)
+            {
+                num += numF[i][j];
+            }
+            numF[i][0] = num / numExp;
+        }
+
+    for(int i=0; i<duration; i++)
+    {
+        printf("Year: %2d\t", i+1);
+        printf("Number of males rabbits: %lld\t", numM[i][0]);
+        printf("Number of females rabbits: %lld\n", numF[i][0]);
     }
 }
 
@@ -441,7 +465,8 @@ double genrand_real2(void)
 /* generates a random number on (0,1)-real-interval */
 double genrand_real3(void)
 {
-    return (((double)genrand_int32()) + 0.5)*(1.0/4294967296.0); 
+    return (((double)genrand_int32()) + 0.5)*
+        (1.0/4294967296.0); 
     /* divided by 2^32 */
 }
 
@@ -460,6 +485,9 @@ int main()
     init_by_array(init, length);
 
     /*INIT*/
+    long long int male[DURATION][DURATION];
+    long long int female[DURATION][DURATION];
+
     static struct Rabbit Rabbit;
     for(int i=0; i<=16; i++)
     {
@@ -467,18 +495,20 @@ int main()
         Rabbit.males[i] = 0;
     }
 
+
     //RabbitSwarmAlgo(DURATION);
-    realRabbit(2, 2, &Rabbit, DURATION);
     
-    /*
-    // Test of fonctions
-    for(int i=0; i<20; i++)
-    {
-        printf("JudgeGender:%d\t", judgeGender());
-        printf("timeSexualMat:%d\t", timeSexualMat());
-        printf("getTimesChildYear:%d\t", getTimesChildYear());
-        printf("getNbBaby:%d\n", getNbBaby());
-    }
-    */
+    time_t start_time = 0;
+    time_t end_time = 0;
+    start_time = clock();
+
+    realRabbit(2, 2, &Rabbit, DURATION, 50);
+
+    end_time = clock();
+    printf("Time Used : %fs\n", (double)
+        (end_time - start_time) / CLOCKS_PER_SEC);
+
+
+    
     return EXIT_SUCCESS;
 }

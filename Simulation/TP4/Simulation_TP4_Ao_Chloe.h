@@ -5,8 +5,10 @@
 #include <math.h>
 #include <stdlib.h> 
 #include <string.h>
+#include <time.h>
 
-#define DURATION 30
+
+#define DURATION 20
 #define NUMRABBITSTART 2
 #define PI 3.141592653589793
 
