@@ -1,0 +1,35 @@
+%在菜单中，编译器选择XeLaTex
+ 
+\documentclass[11pt]{ctexart}
+\usepackage[top=2cm, bottom=2cm, left=2.5cm, right=2.5cm]{geometry} %定义页边距
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{amsmath} %数学公式
+\usepackage[UTF8]{ctex} %输出中文
+\floatname{algorithm}{Algorithm} %算法
+\renewcommand{\algorithmicrequire}{\textbf{Input:}} %输入
+\renewcommand{\algorithmicensure}{\textbf{Output:}} %输出
+ 
+\begin{document}
+\renewcommand{\thealgorithm}{} %这里用来定义算法1，算法2等
+    \begin{algorithm}
+        \caption{PermuterMin} %标题
+        \begin{algorithmic}[1] %每行显示行号，1表示每1行进行显示
+            \Require Structure de minimum
+            \Require where
+            \While{$min.min[where][1] < min.min[where-1][1]$}
+                \State $save[0] = min.min[where][0]$
+                \State $save[1] = min.min[where][1]$
+                \State $save[2] = min.min[where][2]$
+                \State $min.min[where][0] = min.min[where-1][0]$
+                \State $min.min[where][1] = min.min[where-1][1]$
+                \State $min.min[where][2] = min.min[where-1][2]$
+                \State $min.min[where-1][0] = save[0]$
+                \State $min.min[where-1][1] = save[1]$
+                \State $min.min[where-1][2] = savve[2]$
+                \State $where--$
+            \EndWhile
+        \end{algorithmic}
+    \end{algorithm}
+\end{document}
