@@ -250,84 +250,84 @@ void realRabbit(int numStartBaby, int numStartAdult, Rabbit *rabbit,
         rabbit->females[i] = 0;
         rabbit->males[i] = 0;
         }
-    // DEFINE RABBITS 
-    // Define those baby rabbits at start
-    for(int i=0; i<numStartBaby; i++)
-    {
-        int sex = judgeGender();
-        if(sex == 1) rabbit->females[0] ++;
-        else rabbit->females[0]++;
-    }
-    
-    // Define those adults rabbits at start
-    for(int i=0; i<numStartAdult; i++)
-    {
-        int sex = judgeGender();
-        if(sex == 1)
+        // DEFINE RABBITS 
+        // Define those baby rabbits at start
+        for(int i=0; i<numStartBaby; i++)
         {
-            int age = genrand_real2() * 4;
-            rabbit->males[age]++;
+            int sex = judgeGender();
+            if(sex == 1) rabbit->females[0] ++;
+            else rabbit->females[0]++;
         }
-        else{
-            int age = genrand_real2() * 4;
-            rabbit->females[age]++;
-        }
-    }
-
-    /* Simulation for every year */ 
-    for(int year=0; year<duration; year++)
-    {
-        // First, give birth to those little
-        // For rabbits, the number of males and females isn't taken into account
-        // So, it have to use countRabbit and countRabbit_MEM for calcul
-        // All in all, calculate the number of rabbits suitable for childbirth
-        // As long as there are male rabbits, there must be female rabbits !!!
-        long long int numAdultFemales = getAdultFemales(rabbit);
-        int stateMale = getAdultMale(rabbit);
-        long int babyThisYear = 0;
-        long int babies[2] = {0};
     
-        if(stateMale){
-            for(int i=0; i<numAdultFemales; i++)
+        // Define those adults rabbits at start
+        for(int i=0; i<numStartAdult; i++)
+        {
+            int sex = judgeGender();
+            if(sex == 1)
             {
-                int timeThisYear = getTimesChildYear();
-                for(int j=0; j<timeThisYear; j++)
+                int age = genrand_real2() * 4;
+                rabbit->males[age]++;
+            }
+            else{
+                int age = genrand_real2() * 4;
+                rabbit->females[age]++;
+            }
+        }
+
+        /* Simulation for every year */ 
+        for(int year=0; year<duration; year++)
+        {
+            // First, give birth to those little
+            // For rabbits, the number of males and females isn't taken into account
+            // So, it have to use countRabbit and countRabbit_MEM for calcul
+            // All in all, calculate the number of rabbits suitable for childbirth
+            // As long as there are male rabbits, there must be female rabbits !!!
+            long long int numAdultFemales = getAdultFemales(rabbit);
+            int stateMale = getAdultMale(rabbit);
+            long int babyThisYear = 0;
+            long int babies[2] = {0};
+    
+            if(stateMale){
+                for(int i=0; i<numAdultFemales; i++)
                 {
-                    babyThisYear += getNbBaby();
+                    int timeThisYear = getTimesChildYear();
+                    for(int j=0; j<timeThisYear; j++)
+                    {
+                        babyThisYear += getNbBaby();
+                    }
+                }
+
+                for(int i=0; i<babyThisYear; i++)
+                {
+                    int sex = judgeGender();
+                    babies[sex] ++;
                 }
             }
 
-            for(int i=0; i<babyThisYear; i++)
+            // second, those who need to die >_<
+            getDeaths(rabbit);
+
+            // Add those baby (._.)
+            rabbit->males[0] = babies[1];
+            rabbit->females[0] = babies[0];
+
+            // show off !_! our rabbits
+            long long int numMales = 0;
+            long long int numFemales = 0;
+            for(int i=0; i<=16; i++)
             {
-                int sex = judgeGender();
-                babies[sex] ++;
+                numMales += rabbit->males[i];
+                numFemales += rabbit->females[i];
             }
-        }
 
-        // second, those who need to die >_<
-        getDeaths(rabbit);
-
-        // Add those baby (._.)
-        rabbit->males[0] = babies[1];
-        rabbit->females[0] = babies[0];
-
-        // show off !_! our rabbits
-        long long int numMales = 0;
-        long long int numFemales = 0;
-        for(int i=0; i<=16; i++)
-        {
-            numMales += rabbit->males[i];
-            numFemales += rabbit->females[i];
-        }
-
-        numM[year][exp] += numMales;
-        numF[year][exp] += numFemales;
-        /*
-        printf("Year: %2d\t", year+1);
-        printf("Number of males rabbits: %lld\t", numMales);
-        printf("Number of females rabbits: %lld\n", numFemales);
-        */
-    }   
+            numM[year][exp] += numMales;
+            numF[year][exp] += numFemales;
+            /*
+            printf("Year: %2d\t", year+1);
+            printf("Number of males rabbits: %lld\t", numMales);
+            printf("Number of females rabbits: %lld\n", numFemales);
+            */
+        }   
     }
     for(int i=0; i<duration; i++)
         {
