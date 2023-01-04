@@ -1,0 +1,34 @@
+{
+  "Character": [
+    {
+      "id": 1,
+      "CharacterName": "Robert",
+      "CharacterAge": "12",
+      "CharacterStength": "1"
+    },
+    {
+      "id": 2,
+      "CharacterName": "Lucy",
+      "CharacterAge": "33",
+      "email": "lucyb56@gmail.com"
+    },
+    {
+      "id": 3,
+      "CharacterName": "Anna",
+      "CharacterAge": "64",
+      "email": "annasmith23@gmail.com"
+    },
+    {
+      "id": 4,
+      "first_name": "Robert",
+      "CharacterAge": "34",
+      "email": "bobbrown432@yahoo.com"
+    },
+    {
+      "id": 5,
+      "CharacterName": "Roger",
+      "last_name": "76",
+      "email": "rogerbacon12@yahoo.com"
+    }
+  ]
+}    

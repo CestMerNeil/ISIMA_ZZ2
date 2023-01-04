@@ -1,0 +1,37 @@
+%在菜单中，编译器选择XeLaTex
+ 
+\documentclass[11pt]{ctexart}
+\usepackage[top=2cm, bottom=2cm, left=2.5cm, right=2.5cm]{geometry} %定义页边距
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{amsmath} %数学公式
+\usepackage[UTF8]{ctex} %输出中文
+\floatname{algorithm}{Algorithm} %算法
+\renewcommand{\algorithmicrequire}{\textbf{Input:}} %输入
+\renewcommand{\algorithmicensure}{\textbf{Output:}} %输出
+ 
+\begin{document}
+\renewcommand{\thealgorithm}{} %这里用来定义算法1，算法2等
+    \begin{algorithm}
+        \caption{GenererMin} %标题
+        \begin{algorithmic}[1] %每行显示行号，1表示每1行进行显示
+            \Require Structure du graphe considere;
+                    Structure de minimum;
+            \State $empile = 0$
+            \State $min.nbVoisins = 0$
+            \For{$i\to min.tailleL$}
+                \State $min.min[empile][0] \leftarrow min.l[i]$
+                \State $min.min[empile][1] \leftarrow inst.dist[min.i][min.l[i]]$
+                \State $min.min[empile][2] \leftarrow i$
+                \State $Faire Une Fonction PermuterMin$
+                \If{$empile < 5$}
+                        \State $min.nbVoisins ++$
+                        \State $empile++$
+                \EndIf
+            \EndFor
+            \If{$min.nbVoisins > 4$}
+                \State $min.nbVoisins \leftarrow 4$
+        \end{algorithmic}
+    \end{algorithm}
+\end{document}
