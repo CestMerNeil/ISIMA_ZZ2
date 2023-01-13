@@ -24,11 +24,7 @@ void Reseau::ajouter(std::string ajouter){
     list += ajouter;
     list += "\n";
 }
-
-Message::afficher(){
-
-}
-
+/*
 Message::Message(std::string sender, std::string receiver, std::string date){
     this->sender = sender;
     this->receiver = receiver;
@@ -44,7 +40,7 @@ int Message::getId(){
 }
 
 void SMS::setTexte(std::string message){
-    this->msg = message;
+    msg = message;
 }
 
 std::string SMS::getTexte(void){
@@ -54,3 +50,5 @@ std::string SMS::getTexte(void){
 std::string SMS::afficher(void){
     return msg;
 }
+
+*/

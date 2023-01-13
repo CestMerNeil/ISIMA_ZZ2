@@ -28,7 +28,7 @@ class Reseau{
     void ajouter(std::string);
 
 };
-
+/*
 class Message{
     std::string sender;
     std::string receiver;
@@ -37,19 +37,19 @@ class Message{
     int cle = id+1;
 
     public:
-    Message(std::string, std::acosh, std::string);
-    virtual void afficher() = 0;
+    Message(std::string, std::string, std::string);
+    virtual std::string afficher() = 0;
     int getId();
     int getCle();
-}
+};
 
 class SMS : public Message{
-    char[160] msg;
+    char msg[160];
     
     public:
     void setTexte(std::string);
     std::string getTexte(void);
     std::string afficher();
-}
-
+};
+*/
 #endif
