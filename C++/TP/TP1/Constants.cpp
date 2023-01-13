@@ -1,7 +1,13 @@
 #include <iostream>
+using namespace std;
 
-using std::cout;
-using std::endl;
+int main(int, char**) {
+   int * p = new int;
 
-const int SIZE = 10;
-int main(int, char **)
+   *p = 3;
+   cout << *p << endl;
+
+   // delete p;
+
+   return 0;
+}

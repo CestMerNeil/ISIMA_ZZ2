@@ -52,7 +52,7 @@ TEST_CASE("Reseau2") {
 /*
 // C'est bien pourri mais permet d'initialiser r
 #define MON_RESEAU \
-Reseau r;\
+Reseau r; \
 r.ajouter("0473405000");\
 r.ajouter("0473405033");\
 r.ajouter("0473405042");\
