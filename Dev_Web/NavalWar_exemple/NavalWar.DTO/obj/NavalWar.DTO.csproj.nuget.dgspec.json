@@ -1,0 +1,63 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\CodeGithub\\ISIMA_ZZ2\\Dev_Web\\NavalWar_exemple\\NavalWar.DTO\\NavalWar.DTO.csproj": {}
+  },
+  "projects": {
+    "D:\\CodeGithub\\ISIMA_ZZ2\\Dev_Web\\NavalWar_exemple\\NavalWar.DTO\\NavalWar.DTO.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\CodeGithub\\ISIMA_ZZ2\\Dev_Web\\NavalWar_exemple\\NavalWar.DTO\\NavalWar.DTO.csproj",
+        "projectName": "NavalWar.DTO",
+        "projectPath": "D:\\CodeGithub\\ISIMA_ZZ2\\Dev_Web\\NavalWar_exemple\\NavalWar.DTO\\NavalWar.DTO.csproj",
+        "packagesPath": "C:\\Users\\14531\\.nuget\\packages\\",
+        "outputPath": "D:\\CodeGithub\\ISIMA_ZZ2\\Dev_Web\\NavalWar_exemple\\NavalWar.DTO\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "D:\\Application\\Visual_Studio\\SDK\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\14531\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
