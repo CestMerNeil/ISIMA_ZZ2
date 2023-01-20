@@ -1,5 +1,6 @@
 #include "sms.hpp"
 
+/************************* Telephone *****************************/
 Telephone::Telephone(void){};
 
 Telephone::Telephone(std::string numero){
@@ -14,9 +15,10 @@ std::string Telephone::getNumero() const{
     return numero;
 }
 
+/************************* Reseau *****************************/
 Reseau::Reseau(void){};
 
-std::string Reseau::lister(void){
+std::string Reseau::lister(void) const{
     return list;
 }
 
@@ -25,7 +27,16 @@ void Reseau::ajouter(std::string ajouter){
     list += "\n";
 }
 /*
-Message::Message(std::string sender, std::string receiver, std::string date){
+Telephone Reseau::trouveTel(std::string numToFind) const{
+    return 
+}
+*/
+
+/************************* Message *****************************/
+/*
+Message::Message(   std::string sender, 
+                    std::string receiver, 
+                    std::string date){
     this->sender = sender;
     this->receiver = receiver;
     this->date = date;
@@ -50,5 +61,4 @@ std::string SMS::getTexte(void){
 std::string SMS::afficher(void){
     return msg;
 }
-
 */

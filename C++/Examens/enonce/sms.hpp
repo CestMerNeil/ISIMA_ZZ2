@@ -7,26 +7,31 @@
 
 int ID = 12345;
 
-class Telephone{
-    std::string numero;
-
-    public:
-    Telephone(void);
-    Telephone(std::string num);
-
-    void setNumero(std::string num);
-    std::string getNumero() const;
-};
-
 class Reseau{
+    private:
     std::string list;
 
     public:
     Reseau(void);
 
-    std::string lister();
+    std::string lister() const;
     void ajouter(std::string);
+    //Telephone trouveTel(std::string numToFind) const;
 
+};
+
+class Telephone{
+    private:
+    std::string numero;
+    
+
+    public:
+    Reseau *reseau; // For get the reseau right now.
+    Telephone(void);
+    Telephone(std::string num);
+
+    void setNumero(std::string num);
+    std::string getNumero() const;
 };
 /*
 class Message{
