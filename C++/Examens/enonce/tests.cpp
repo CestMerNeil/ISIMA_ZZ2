@@ -49,7 +49,7 @@ TEST_CASE("Reseau2") {
  r.ajouter("0473405042");
  CHECK ("0473405000\n0473405042\n0473407632\n" == r.lister());
 }
-/*
+
 // C'est bien pourri mais permet d'initialiser r
 #define MON_RESEAU \
 Reseau r; \
@@ -96,13 +96,13 @@ TEST_CASE("SMS1") {
 	CHECK("Examen en cours" == sms.afficher());
 } */
 
-/*
+
 TEST_CASE("Message0") {
    Message m;
    // si ca compile, c'est perdu ...
 } 
-*/
-/*
+
+
 TEST_CASE("Message1") {
  int nb = Message::getCle();
  Message * sms1 = new SMS("", "", "");
@@ -215,4 +215,4 @@ TEST_CASE("MMS3") {
   CHECK(1 == de->getNbMessages());
   CHECK(1 ==  a->getNbMessages());
 
-} */
+}

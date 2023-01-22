@@ -26,14 +26,14 @@ void Reseau::ajouter(std::string ajouter){
     list += ajouter;
     list += "\n";
 }
-/*
+
 Telephone Reseau::trouveTel(std::string numToFind) const{
     return 
 }
-*/
+
 
 /************************* Message *****************************/
-/*
+
 Message::Message(   std::string sender, 
                     std::string receiver, 
                     std::string date){
@@ -61,4 +61,4 @@ std::string SMS::getTexte(void){
 std::string SMS::afficher(void){
     return msg;
 }
-*/
+

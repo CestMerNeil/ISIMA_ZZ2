@@ -16,8 +16,7 @@ class Reseau{
 
     std::string lister() const;
     void ajouter(std::string);
-    //Telephone trouveTel(std::string numToFind) const;
-
+    Telephone trouveTel(std::string numToFind) const;
 };
 
 class Telephone{
@@ -33,7 +32,7 @@ class Telephone{
     void setNumero(std::string num);
     std::string getNumero() const;
 };
-/*
+
 class Message{
     std::string sender;
     std::string receiver;
