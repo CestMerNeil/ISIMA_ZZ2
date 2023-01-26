@@ -5,7 +5,7 @@
 #include <string>
 
 class Mere{
-    private:
+protected:
     int _name;
     int _computer;
     std::string _nom;
@@ -21,10 +21,12 @@ class Mere{
 };
 
 class Fille : public Mere{
-private:
+protected:
     int _age;
 
 public:
+    void afficher();
+    Fille();
     Fille(std::string nom);
     void setAge(int age);
 };

@@ -18,7 +18,7 @@ std::string Mere::getName(){
 }
 
 void Mere::afficher(){
-    std::cout << _name << std::endl;
+    std::cout << _nom << "est Mere" << std::endl;
 }
 
 void Mere::setName(std::string nom) {
@@ -30,8 +30,13 @@ int Mere::getComputer() {
 }
 
 /************************** Fille ***************************/
+Fille::Fille(){}
 Fille::Fille(std::string nom) {
-    Mere::setName(nom);
+    Mere::_nom = nom;
+}
+
+void Fille::afficher() {
+    std::cout << Mere::getName() << "est Fille" << std::endl;
 }
 
 void Fille::setAge(int age) {
