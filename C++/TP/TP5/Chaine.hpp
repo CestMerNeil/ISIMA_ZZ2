@@ -4,14 +4,20 @@
 #include <iostream>
 #include <fstream>
 
-class Chaine  {
+class Chaine {
 private:
     int _capacite;
-    int *tab;
+    char *tab;
 public:
     Chaine();
-    int getCapacite();
-    int c_str();
+    explicit Chaine(int capacite);
+    explicit Chaine(char value);
+    explicit Chaine(char *value);
+    [[nodiscard]] int getCapacite() const;
+    [[nodiscard]] const char * c_str() const; // Question nodiscard->?
+    void afficher();
+
+    void afficher(std::ostream ss); // No idea!
 };
 
 #endif

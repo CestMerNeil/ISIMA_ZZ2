@@ -9,14 +9,14 @@ TEST_CASE("Constructeur par defaut") {
    CHECK(  0 == c.c_str()); // 0, NULL, ou nullptr
 }
 
-/*
+
 TEST_CASE("Verification des const sur les accesseurs") {
    const Chaine c;
    CHECK( -1 == c.getCapacite());
    CHECK(  0 == c.c_str()); // 0, NULL, ou nullptr
-} */
+}
 
-/*
+
 TEST_CASE("Constructeur par chaine C") {
 	char  source []= "rien";
     Chaine c1(source);
@@ -28,18 +28,18 @@ TEST_CASE("Constructeur par chaine C") {
     CHECK( 0 == strcmp("", c2.c_str())); 
 
     // Verifier que la liberation memoire est bien faite
-} */
+}
 
-/*
+
 TEST_CASE("Constructeur avec capacite") {
     Chaine c1(6);
     CHECK( 6 == c1.getCapacite());
     CHECK( 0 == strlen(c1.c_str())); 
 
     // Verifier que la liberation memoire est bien faite
-}*/
+}
 
-/*
+
 TEST_CASE("Constructeur de copie") {
     Chaine s1(10);   // une chaine vide
     Chaine s2 = s1;  // une autre chaine vide
@@ -49,21 +49,22 @@ TEST_CASE("Constructeur de copie") {
     // j'ai converti en void * uniquement pour l'affichage de catch
     CHECK( (void *)s1.c_str() != (void *)s2.c_str() );
     CHECK( 0 == strcmp(s1.c_str(), s2.c_str() ));
-}*/
+}
+// Question: What will happen if we copy a objet?
 
-/*
+
 TEST_CASE("methode afficher") {
 	const char * original = "une chaine a tester";
-    const Chaine c1(original);
+    const Chaine c1(original); //?!!!!
     std::stringstream ss;
     
     c1.afficher(); // on verifie juste que ca compile
     c1.afficher(ss);
 
     CHECK( ss.str() == original); // test de std::string :-)
-}*/
+}
 
-/*
+
 TEST_CASE("operateur d'affectation") {
 	Chaine s1("une premiere chaine");
     Chaine s2("une deuxieme chaine plus longue que la premiere");
@@ -75,15 +76,14 @@ TEST_CASE("operateur d'affectation") {
     CHECK( 0 == strcmp(s1.c_str(), s2.c_str() ));
 
     s1 = s1; // est ce que cela va survivre a l execution ?
-}*/
+}
 
-/*
+
 TEST_CASE("Surcharge <<") {
 	const char * chaine = "une nouvelle surcharge";
 	Chaine s(chaine);
-    std::stringstream ss;
+    std::stringstream ss; // the same problem.
     // ss << s;  // :-)
 
     CHECK( ss.str() == chaine ); //  test de std::string, again :-))
 }
-*/
