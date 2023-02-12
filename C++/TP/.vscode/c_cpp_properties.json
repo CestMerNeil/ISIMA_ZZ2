@@ -1,18 +1,32 @@
 {
-  "configurations": [
-    {
-      "name": "windows-gcc-x86",
-      "includePath": [
-        "${workspaceFolder}/**"
-      ],
-      "compilerPath": "D:/Application/GCC/bin/gcc.exe",
-      "cStandard": "${default}",
-      "cppStandard": "${default}",
-      "intelliSenseMode": "windows-gcc-x86",
-      "compilerArgs": [
-        ""
-      ]
-    }
-  ],
-  "version": 4
+    "configurations": [
+        {
+            "name": "windows-gcc-x86",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "compilerPath": "/usr/bin/clang++",
+            "cStandard": "${default}",
+            "cppStandard": "${default}",
+            "intelliSenseMode": "macos-clang-x64",
+            "compilerArgs": [
+                ""
+            ]
+        },
+        {
+            "name": "Mac",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "macFrameworkPath": [
+                "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+            ],
+            "compilerPath": "/usr/bin/clang++",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "macos-clang-arm64"
+        }
+    ],
+    "version": 4
 }

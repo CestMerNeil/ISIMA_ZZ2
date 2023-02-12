@@ -2,14 +2,19 @@
 #include <cstring>
 #include <sstream>
 
-/****************** Chaine *********************/
+/****************** Constructors *********************/
 Chaine::Chaine() {
     _capacite = -1;
     tab = nullptr;
 }
 
-Chaine::Chaine(char *value) {
-    tab = value;
+Chaine::Chaine(char value) {
+    _capacite = -1;
+    tab = nullptr;
+}
+
+Chaine::Chaine(char * value) {
+    tab = reinterpret_cast<const std::ostream *>(*value);
     _capacite = sizeof(value);
 }
 
@@ -21,16 +26,17 @@ Chaine::Chaine(int capacite) {
 int Chaine::getCapacite() const {
     return _capacite;
 }
-
+/*
 char * Chaine::c_str() const {
-    return tab;
+    //return tab;
 }
 
 void Chaine::afficher() {}
 
 void Chaine::afficher(std::ostream ss) {
-    ss = *tab;
+    ss = * tab;
 }
 
+*/
 
 
