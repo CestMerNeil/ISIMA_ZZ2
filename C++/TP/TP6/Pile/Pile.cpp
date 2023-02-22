@@ -3,44 +3,43 @@
  * @date 2023.02.08 
  */
 
-#include <iostream>
-#include <string>
-#define CATCH_CONFIG_MAIN
-#define CATCH_CONFIG_RUNNER
 
-class Pile {
-    private:
-    int taille;
-    int actu = 0;
-    int * info[];
-    public:
+#include "Pile.hpp"
 
-    Pile(int num){
+Pile::Pile(int num){
+    if(num<=0){
+        throw std::invalid_argument("ERROR!!! In Pile.");
+    }
+    else {
         this->taille = num;
-        if(num<=0){
-            std::invalid_argument;
-        }
-    }
-    Pile(){
-        this->taille = 10;
+        this->actu = 0;
     }
 
-    char top(){
-        return * info[0];
-    }
-    void pop(){
-        info[actu] = nullptr;
-        actu --;
-    }
-    void push(int element){
-        * info[actu] = element;
-        actu ++;
-    }
-    void empty() {
-        int * info = nullptr;
-    }
+}
+Pile::Pile(){
+    this->taille = 10;
+    this->actu = 0;
+}
 
-    int size(){
-        return actu;
-    }
-};
+const int & Pile::top() const {
+    return info[actu-1];
+}
+
+void Pile::pop(){
+    actu --;
+}
+
+void Pile::push(const int & element){
+    info[actu] = element;
+    actu ++;
+}
+
+bool Pile::empty() const {
+    bool state = true;
+    if (actu != 0) state = false;
+    return state;
+}
+
+int Pile::size() const {
+    return actu;
+}
