@@ -1,1 +1,1 @@
-build/main.o: main.cpp catch.hpp
+build/main.o: main.cpp catch.hpp deviant.hpp

@@ -1,7 +1,7 @@
 SRC=Pile.cpp test.cpp main.cpp
-EXE=tp6
+EXE=hellocpp
 CXX=g++
-CXXFLAGS+=-Wall -Wextra -MMD -g
+CXXFLAGS+=-Wall -Wextra -MMD -g -Wfatal-errors -std=c++14
 LDFLAGS= 
 
 OBJ=$(addprefix build/,$(SRC:.cpp=.o))

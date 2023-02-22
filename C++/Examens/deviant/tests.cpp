@@ -5,7 +5,7 @@
 #include "catch.hpp"
 #include "deviant.hpp"
 
-/*
+
 TEST_CASE("Personne1") {
 	  const char * nom = "Jeffrey Dean Morgan";
     Personne p1(nom);
@@ -15,24 +15,24 @@ TEST_CASE("Personne1") {
     p1.setNom("negan");
     
     REQUIRE("negan" == p1.getNom());
-} */
+}
 
-/*
+
 TEST_CASE("Personne2") {
     const char * nom = "Rick Grimes";
     const Personne p2(nom);
 
     REQUIRE(nom     == p2.getNom());
-} */
+} 
 
-/*
+
 TEST_CASE("Personne3") {
     const Personne p3;
 
     REQUIRE("inconnu"    == p3.getNom());
-}*/
+}
 
-/*
+
 TEST_CASE("Individu1") {
     int dep = Individu::getCompteur();
 
@@ -43,9 +43,9 @@ TEST_CASE("Individu1") {
     Individu  * pi = new Individu;
     delete   pi;
     CHECK (dep+3 == Individu::getCompteur());    
-} */
+}
 
-/*
+
 TEST_CASE("Individu2") {
   std::stringstream ss1, ss2;
   ss1 << Individu::getCompteur()+1;
@@ -58,7 +58,7 @@ TEST_CASE("Individu2") {
 
   i.afficher(ss2);
   REQUIRE(ss1.str() == ss2.str());
-} */
+}
 
 /*
 TEST_CASE("Personne4") {

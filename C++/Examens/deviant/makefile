@@ -1,7 +1,7 @@
 SRC=deviant.cpp main.cpp tests.cpp
 EXE=examen
 CXX=g++
-CXXFLAGS+=-Wall -Wextra -MMD -g
+CXXFLAGS+=-Wall -Wextra -MMD -g -std=c++14 -Wfatal-errors
 LDFLAGS= 
 
 OBJ=$(addprefix build/,$(SRC:.cpp=.o))
