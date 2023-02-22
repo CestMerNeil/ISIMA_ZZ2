@@ -1,0 +1,17 @@
+kiversion: "3.3"
+
+services:
+  front:
+    image: "abiosoft/caddy"
+    ports:
+      - "8050:8090"
+    volumes:
+      - "./Caddyfile:/etc/Caddyfile"
+  web:
+    build: .
+    ports:
+      - "8080"
+  mongo:
+    image: "mongo:5"
+    ports:
+      - "27017:27017"
