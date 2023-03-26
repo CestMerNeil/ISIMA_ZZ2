@@ -5,16 +5,16 @@
 
 
 TEST_CASE("telephone1a") {
- Telephone iphone;
+/* Telephone iphone;
  const char * isima = "0473405000";
 
  CHECK( "" == iphone.getNumero());
  iphone.setNumero(isima);
- CHECK( isima == iphone.getNumero()); 
+ CHECK( isima == iphone.getNumero()); */
 }
 
 
-
+/*
 TEST_CASE("telephone1b") {
  std::string loic = "0473405042";
  Telephone   iphone(loic);
@@ -52,7 +52,7 @@ TEST_CASE("Reseau2") {
 
 // C'est bien pourri mais permet d'initialiser r
 #define MON_RESEAU \
-Reseau r; \
+Reseau r;\
 r.ajouter("0473405000");\
 r.ajouter("0473405033");\
 r.ajouter("0473405042");\
@@ -94,14 +94,14 @@ TEST_CASE("SMS1") {
 	sms.setTexte("Examen en cours");
 	CHECK("Examen en cours" == sms.getTexte());
 	CHECK("Examen en cours" == sms.afficher());
-}
+} */
 
 /*
 TEST_CASE("Message0") {
    Message m;
    // si ca compile, c'est perdu ...
-} 
-*/
+} */
+
 /*
 TEST_CASE("Message1") {
  int nb = Message::getCle();

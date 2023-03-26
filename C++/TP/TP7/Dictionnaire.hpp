@@ -28,9 +28,9 @@ class ListeMotsTries : public Dictionnaire {
 
     public:
     //void inserer(const const_iterator & inDebut, const const_iterator & inFin);
-/*     const_iterator<T> debut() const;
+    const_iterator<T> debut() const;
     const_iterator fin() const;
- */
+
 };
 
 #endif
