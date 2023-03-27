@@ -2,7 +2,7 @@ SRC=main.cpp sms.cpp tests.cpp
 #SRC=$(wildcard *.cpp)  
 EXE=sms
 
-CXXFLAGS+=-Wall -Wextra -MMD -g -O2
+CXXFLAGS+=-Wall -Wextra -MMD -g -O2 -Wfatal-errors -std=c++14
 LDFLAGS= 
 
 OBJ=$(addprefix build/,$(SRC:.cpp=.o))

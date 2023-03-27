@@ -2,19 +2,17 @@
 #include "sms.hpp"
 #include <cstring>
 
-
-
 TEST_CASE("telephone1a") {
-/* Telephone iphone;
+Telephone iphone;
  const char * isima = "0473405000";
 
  CHECK( "" == iphone.getNumero());
  iphone.setNumero(isima);
- CHECK( isima == iphone.getNumero()); */
+ CHECK( isima == iphone.getNumero()); 
 }
 
 
-/*
+
 TEST_CASE("telephone1b") {
  std::string loic = "0473405042";
  Telephone   iphone(loic);
@@ -27,6 +25,7 @@ TEST_CASE("telephone2") {
 
  CHECK( "0473449520" == iphone.getNumero());
 }
+
 
 TEST_CASE("Reseau1") {
  Reseau r;
@@ -89,20 +88,20 @@ TEST_CASE("Telephone3") {
  CHECK( 0 == t.getReseau());
 }
 
+
 TEST_CASE("SMS1") {
 	SMS sms("0473405044", "0473405042", "20171207");
 	sms.setTexte("Examen en cours");
 	CHECK("Examen en cours" == sms.getTexte());
 	CHECK("Examen en cours" == sms.afficher());
-} */
-
+} 
 /*
 TEST_CASE("Message0") {
    Message m;
    // si ca compile, c'est perdu ...
 } */
 
-/*
+
 TEST_CASE("Message1") {
  int nb = Message::getCle();
  Message * sms1 = new SMS("", "", "");
@@ -179,14 +178,14 @@ TEST_CASE("MMS1") {
   delete m1;  
 }
 
-TEST_CASE("MMS2") {
+/* TEST_CASE("MMS2") {
 	MMS * m1 = new MMS("", "", "");
   CHECK("" == m1->afficher());
   m1->joindre(new Video);
 
   SMS * m2 = m1;
   m2->setTexte("exam");
-  CHECK("exam[[video]]" == m2->afficher());    
+  CHECK("exam[[video]]" == m2->afficher());   
 
   Message * m3 = m1;
   CHECK("exam[[video]]" == m3->afficher());    
@@ -215,4 +214,5 @@ TEST_CASE("MMS3") {
   CHECK(1 == de->getNbMessages());
   CHECK(1 ==  a->getNbMessages());
 
-} */
+} 
+ */
