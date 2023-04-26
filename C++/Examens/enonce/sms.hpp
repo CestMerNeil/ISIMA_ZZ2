@@ -21,6 +21,7 @@ class Image : public Media{
     std::string afficher() override{
         return "[[image]]";
     }
+
 };
 class Son : public Media{
     std::string afficher() override{

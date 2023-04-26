@@ -1,0 +1,9 @@
+DECLARE
+CURSOR c IS SELECT sal,empno,ename FROM emp WHERE empno IN (SELECT empno FROM emp START WITH empno = 7902 CONNECT BY empno = prior mgr) AND sal > 4000;
+r_emp c%ROWTYPE;
+BEGIN
+	FOR r_emp IN c LOOP
+		INSERT INTO tempo values (r_emp.sal,0,r_emp.ename);
+	END LOOP;
+END;
+/
