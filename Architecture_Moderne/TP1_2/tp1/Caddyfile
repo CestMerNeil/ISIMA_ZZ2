@@ -1,3 +1,0 @@
-localhost:8090{
-    proxy/tp1node11:8081 tp1node12:8082
-}
