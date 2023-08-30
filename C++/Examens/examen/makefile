@@ -1,7 +1,7 @@
 SRC=main.cpp ferme.cpp tests.cpp
 EXE=ferme
 CXX=g++
-CXXFLAGS=-Wall -Wextra -MMD -g -fdiagnostics-color=auto
+CXXFLAGS=-Wall -Wextra -MMD -g -fdiagnostics-color=auto --std=c++14
 LDFLAGS= 
 
 OBJ=$(addprefix build/,$(SRC:.cpp=.o))

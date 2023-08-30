@@ -5,7 +5,7 @@
 #include "catch.hpp"
 #include "ferme.hpp"
 
-/*
+
 TEST_CASE("Produit1") {
     const char * nom   = "lait";
     
@@ -60,7 +60,7 @@ TEST_CASE("Exception1") {
     REQUIRE(message == e->what());
     delete e;
 }
-
+/*
 TEST_CASE("Vache1") {
     const char * surnom   = "clarabelle";
     
