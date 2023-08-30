@@ -1,4 +1,0 @@
-localhost:8090 {
-    proxy / tp1node501:8080 tp1node502:8080 tp1node503:8080
-}
-

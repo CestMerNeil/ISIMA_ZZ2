@@ -69,6 +69,8 @@ public:
     Telephone& trouveTel(std::string);
 };
 
+/**********************************************SMS*/
+// Improtant!!! 
 class MauvaisNumero : public std::invalid_argument
 {
 public:
@@ -132,7 +134,5 @@ class MMS : public Message {
     }
     std::string afficher() override { return text; }
 };
-
-
 
 #endif

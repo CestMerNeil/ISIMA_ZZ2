@@ -33,6 +33,24 @@ class Individu {
     void afficher(std::ostream& ) const;
 };
 
+class Hello{
+    private:
+    std::string message;
+
+    public:
+    Hello();
+    Hello(std::string);
+    std::string getMessage() const;
+    void setMessage(std::string);
+};
+
+class Bonjour{
+    public:
+    Bonjour();
+    std::string direBonjour() const;
+};
+
+
 // Utiliser une des versions de Cite
 // #define CITE Cite::getCite()
 // extern Cite CITE;
