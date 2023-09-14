@@ -1,0 +1,7 @@
+<<<<<<< HEAD
+﻿  TP2.cpp
+C:\Users\aoxie\Desktop\CodeDeAoXIE\ISIMA_ZZ2\Outils_Aide_de_la_Decision\TP2\TP2\TP2\TP2.cpp(10,15): warning C4244: 'argument' : conversion de 'time_t' en 'unsigned int', perte possible de données
+  TP2.vcxproj -> C:\Users\aoxie\Desktop\CodeDeAoXIE\ISIMA_ZZ2\Outils_Aide_de_la_Decision\TP2\TP2\Debug\TP2.exe
+=======
+﻿D:\Application\Visual_Studio\IDE\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(460,5): error MSB8020: Les outils de génération pour Visual Studio 2019 (ensemble d'outils de plateforme = 'v142') sont introuvables. Pour générer à l'aide des outils de génération v142, installez les outils de génération Visual Studio 2019. Vous avez également la possibilité de mettre à niveau les outils Visual Studio actuels en sélectionnant le menu Projet ou en cliquant avec le bouton droit sur la solution, puis en sélectionnant "Recibler la solution".
+>>>>>>> 2480f68ea9b0bf8c73c0867f2cf0b067d607726e

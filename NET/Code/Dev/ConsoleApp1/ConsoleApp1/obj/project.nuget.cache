@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Ow1XC3VF3egjGBDIN9KEFYNSgO6m33sXYyN6ekDXmGXLXJfTeUq6lRhsYI4ygF9yqS/2acnqyBLYLy9r4KJBaA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\aoxie\\Desktop\\Dev\\ConsoleApp1\\ConsoleApp1\\ConsoleApp1.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\aoxie\\.nuget\\packages\\system.security.principal.windows\\5.0.0\\system.security.principal.windows.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
