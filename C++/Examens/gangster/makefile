@@ -1,7 +1,7 @@
 SRC=gangster.cpp gangster.cpp main.cpp tests.cpp
 EXE=gangsterZZ
 CXX=g++
-CXXFLAGS+=-Wall -Wextra -MMD -g -std=g++11
+CXXFLAGS+=-Wall -Wextra -MMD -g -std=g++14
 LDFLAGS= 
 
 OBJ=$(addprefix build/,$(SRC:.cpp=.o))

@@ -1,0 +1,4 @@
+localhost:8090, http://front:8090  {
+    proxy / web:8080
+}
+
